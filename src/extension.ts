@@ -18,63 +18,72 @@ export function activate(context: vscode.ExtensionContext) {
         context.subscriptions.push(command);
     };
 
-    registerCommand('extension.cursorNextWordEndJa', cursorNextWordEndJa);
-    registerCommand('extension.cursorNextWordEndSelectJa', cursorNextWordEndSelectJa);
-    registerCommand('extension.cursorPrevWordStartJa', cursorPrevWordStartJa);
-    registerCommand('extension.cursorPrevWordStartSelectJa', cursorPrevWordStartSelectJa);
+    // Register commands
+    registerCommand('japaneseWordHandler.cursorWordEndRight', cursorWordEndRight);
+    registerCommand('japaneseWordHandler.cursorWordEndRightSelect', cursorWordEndRightSelect);
+    registerCommand('japaneseWordHandler.cursorWordStartLeft', cursorWordStartLeft);
+    registerCommand('japaneseWordHandler.cursorWordStartLeftSelect', cursorWordStartLeftSelect);
+    registerCommand('japaneseWordHandler.deleteWordRight', deleteWordRight);
+    registerCommand('japaneseWordHandler.deleteWordLeft', deleteWordLeft);
+
+    // Register legacy commands for compatibility
+    registerCommand('extension.cursorWordEndRight', cursorWordEndRight);
+    registerCommand('extension.cursorWordEndRightSelect', cursorWordEndRightSelect);
+    registerCommand('extension.cursorWordStartLeft', cursorWordStartLeft);
+    registerCommand('extension.cursorWordStartLeftSelect', cursorWordStartLeftSelect);
     registerCommand('extension.deleteWordRight', deleteWordRight);
     registerCommand('extension.deleteWordLeft', deleteWordLeft);
 }
 
 //-----------------------------------------------------------------------------
-export function cursorNextWordEndJa(
+export function cursorWordEndRight(
     editor: TextEditor,
     wordSeparators: string
 ) {
     const document = editor.document;
     editor.selections = editor.selections
-        .map(s => positionOfNextWordEnd(document, s.active, wordSeparators))
+        .map(s => findNextWordEnd(document, s.active, wordSeparators))
         .map(p => new Selection(p, p));
     if (editor.selections.length === 1) {
         editor.revealRange(editor.selection);
     }
 }
 
-export function cursorNextWordEndSelectJa(
+export function cursorWordEndRightSelect(
     editor: TextEditor,
     wordSeparators: string
 ) {
     editor.selections = editor.selections
         .map(s => new Selection(
             s.anchor,
-            positionOfNextWordEnd(editor.document, s.active, wordSeparators))
+            findNextWordEnd(editor.document, s.active, wordSeparators))
         );
     if (editor.selections.length === 1) {
         editor.revealRange(editor.selection);
     }
 }
 
-export function cursorPrevWordStartJa(
+export function cursorWordStartLeft(
     editor: TextEditor,
     wordSeparators: string
 ) {
     const document = editor.document;
     editor.selections = editor.selections
-        .map(s => positionOfPrevWordStart(document, s.active, wordSeparators))
+        .map(s => findPreviousWordStart(document, s.active, wordSeparators))
         .map(p => new Selection(p, p));
     if (editor.selections.length === 1) {
         editor.revealRange(editor.selection);
     }
 }
 
-export function cursorPrevWordStartSelectJa(
+export function cursorWordStartLeftSelect(
     editor: TextEditor,
     wordSeparators: string
 ) {
     editor.selections = editor.selections
         .map(s => new Selection(
             s.anchor,
-            positionOfPrevWordStart(editor.document, s.active, wordSeparators)
+            findPreviousWordStart(editor.document, s.active, wordSeparators)
         ));
     if (editor.selections.length === 1) {
         editor.revealRange(editor.selection);
@@ -90,7 +99,7 @@ export function deleteWordRight(
         let selections = editor.selections.map(
             s => new Selection(
                 s.anchor,
-                positionOfNextWordEnd(document, s.active, wordSeparators)
+                findNextWordEnd(document, s.active, wordSeparators)
             ));
         for (let selection of selections) {
             e.delete(selection);
@@ -111,7 +120,7 @@ export function deleteWordLeft(
         let selections = editor.selections.map(
             s => new Selection(
                 s.anchor,
-                positionOfPrevWordStart(document, s.active, wordSeparators)
+                findPreviousWordStart(document, s.active, wordSeparators)
             ));
         for (let selection of selections) {
             e.delete(selection);
@@ -138,7 +147,7 @@ enum CharClass {
 /**
  * Gets position of the end of a word after specified position.
  */
-function positionOfNextWordEnd(
+function findNextWordEnd(
     doc: TextDocument,
     caretPos: Position,
     wordSeparators: string
@@ -187,7 +196,7 @@ function positionOfNextWordEnd(
 /**
  * Gets position of the word before specified position.
  */
-function positionOfPrevWordStart(
+function findPreviousWordStart(
     doc: TextDocument,
     caretPos: Position,
     wordSeparators: string
