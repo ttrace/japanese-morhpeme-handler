@@ -31,7 +31,7 @@ suite("japanese-word-handler", () => {
         await vscode.commands.executeCommand(commandName);
     });
 
-    suite("cursorNextWordEndJa", () => {
+    suite("cursorWordEndRight", () => {
 
         const testSingleCursorMotion = async function (
             editor: TextEditor,
@@ -41,7 +41,7 @@ suite("japanese-word-handler", () => {
             await setText(editor, content);
             const initPos = new Position(0, 0);
             editor.selections = [new Selection(initPos, initPos)];
-            myExtension.cursorNextWordEndJa(editor, wordSeparators);
+            myExtension.cursorWordEndRight(editor, wordSeparators);
             return editor.selection.active;
         };
 
@@ -172,7 +172,7 @@ suite("japanese-word-handler", () => {
             });
     });
 
-    suite("cursorPrevWordStartJa", () => {
+    suite("cursorWordStartLeft", () => {
 
         const testSingleCursorMotion = async function (
             editor: TextEditor,
@@ -183,7 +183,7 @@ suite("japanese-word-handler", () => {
             const initPos = editor.document.positionAt(
                 content.length * 2); // LFs may become CRLFs
             editor.selections = [new Selection(initPos, initPos)];
-            myExtension.cursorPrevWordStartJa(editor, wordSeparators);
+            myExtension.cursorWordStartLeft(editor, wordSeparators);
             return editor.selection.active;
         };
 
