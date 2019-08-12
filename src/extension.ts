@@ -5,67 +5,25 @@ import { Position, Range, Selection, TextDocument, TextEditor } from 'vscode';
 
 //-----------------------------------------------------------------------------
 export function activate(context: vscode.ExtensionContext) {
-    let command;
+    function registerCommand(name: string, logic: Function) {
+        let command = vscode.commands.registerCommand(
+            name,
+            () => {
+                let editor = vscode.window.activeTextEditor!;
+                let wordSeparators = vscode.workspace
+                    .getConfiguration("editor", editor.document.uri)
+                    .get("wordSeparators");
+                logic(editor, wordSeparators);
+            });
+        context.subscriptions.push(command);
+    };
 
-    function getWordSeparator(editor: TextEditor) {
-        return vscode.workspace
-            .getConfiguration("editor", editor.document.uri)
-            .get("wordSeparators") as string;
-    }
-
-    command = vscode.commands.registerCommand(
-        'extension.cursorNextWordEndJa',
-        () => {
-            let editor = vscode.window.activeTextEditor!;
-            let wordSeparators = getWordSeparator(editor);
-            cursorNextWordEndJa(editor, wordSeparators);
-        });
-    context.subscriptions.push(command);
-
-    command = vscode.commands.registerCommand(
-        'extension.cursorNextWordEndSelectJa',
-        () => {
-            let editor = vscode.window.activeTextEditor!;
-            let wordSeparators = getWordSeparator(editor);
-            cursorNextWordEndSelectJa(editor, wordSeparators);
-        });
-    context.subscriptions.push(command);
-
-    command = vscode.commands.registerCommand(
-        'extension.cursorPrevWordStartJa',
-        () => {
-            let editor = vscode.window.activeTextEditor!;
-            let wordSeparators = getWordSeparator(editor);
-            cursorPrevWordStartJa(editor, wordSeparators);
-        });
-    context.subscriptions.push(command);
-
-    command = vscode.commands.registerCommand(
-        'extension.cursorPrevWordStartSelectJa',
-        () => {
-            let editor = vscode.window.activeTextEditor!;
-            let wordSeparators = getWordSeparator(editor);
-            cursorPrevWordStartSelectJa(editor, wordSeparators);
-        });
-    context.subscriptions.push(command);
-
-    command = vscode.commands.registerCommand(
-        'extension.deleteWordRight',
-        () => {
-            let editor = vscode.window.activeTextEditor!;
-            let wordSeparators = getWordSeparator(editor);
-            deleteWordRight(editor, wordSeparators);
-        });
-    context.subscriptions.push(command);
-
-    command = vscode.commands.registerCommand(
-        'extension.deleteWordLeft',
-        () => {
-            let editor = vscode.window.activeTextEditor!;
-            let wordSeparators = getWordSeparator(editor);
-            deleteWordLeft(editor, wordSeparators);
-        });
-    context.subscriptions.push(command);
+    registerCommand('extension.cursorNextWordEndJa', cursorNextWordEndJa);
+    registerCommand('extension.cursorNextWordEndSelectJa', cursorNextWordEndSelectJa);
+    registerCommand('extension.cursorPrevWordStartJa', cursorPrevWordStartJa);
+    registerCommand('extension.cursorPrevWordStartSelectJa', cursorPrevWordStartSelectJa);
+    registerCommand('extension.deleteWordRight', deleteWordRight);
+    registerCommand('extension.deleteWordLeft', deleteWordLeft);
 }
 
 //-----------------------------------------------------------------------------
