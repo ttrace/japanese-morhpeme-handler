@@ -36,100 +36,97 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 //-----------------------------------------------------------------------------
-export function cursorWordEndRight(
+function _move(
     editor: TextEditor,
-    wordSeparators: string
+    wordSeparators: string,
+    find: Function
 ) {
     const document = editor.document;
     editor.selections = editor.selections
-        .map(s => findNextWordEnd(document, s.active, wordSeparators))
+        .map(s => find(document, s.active, wordSeparators))
         .map(p => new Selection(p, p));
     if (editor.selections.length === 1) {
         editor.revealRange(editor.selection);
     }
 }
 
-export function cursorWordEndRightSelect(
+function _select(
     editor: TextEditor,
-    wordSeparators: string
+    wordSeparators: string,
+    find: Function
 ) {
     editor.selections = editor.selections
         .map(s => new Selection(
             s.anchor,
-            findNextWordEnd(editor.document, s.active, wordSeparators))
+            find(editor.document, s.active, wordSeparators))
         );
     if (editor.selections.length === 1) {
         editor.revealRange(editor.selection);
     }
 }
 
+function _delete(
+    editor: TextEditor,
+    wordSeparators: string,
+    find: Function
+) {
+    return editor.edit(e => {
+        const document = editor.document;
+        let selections = editor.selections.map(
+            s => new Selection(
+                s.anchor,
+                find(document, s.active, wordSeparators)
+            ));
+        for (let selection of selections) {
+            e.delete(selection);
+        }
+    }).then(() => {
+        if (editor.selections.length === 1) {
+            editor.revealRange(editor.selection);
+        }
+    });
+}
+
+export function cursorWordEndRight(
+    editor: TextEditor,
+    wordSeparators: string
+) {
+    _move(editor, wordSeparators, findNextWordEnd);
+}
+
+export function cursorWordEndRightSelect(
+    editor: TextEditor,
+    wordSeparators: string
+) {
+    _select(editor, wordSeparators, findNextWordEnd);
+}
+
 export function cursorWordStartLeft(
     editor: TextEditor,
     wordSeparators: string
 ) {
-    const document = editor.document;
-    editor.selections = editor.selections
-        .map(s => findPreviousWordStart(document, s.active, wordSeparators))
-        .map(p => new Selection(p, p));
-    if (editor.selections.length === 1) {
-        editor.revealRange(editor.selection);
-    }
+    _move(editor, wordSeparators, findPreviousWordStart);
 }
 
 export function cursorWordStartLeftSelect(
     editor: TextEditor,
     wordSeparators: string
 ) {
-    editor.selections = editor.selections
-        .map(s => new Selection(
-            s.anchor,
-            findPreviousWordStart(editor.document, s.active, wordSeparators)
-        ));
-    if (editor.selections.length === 1) {
-        editor.revealRange(editor.selection);
-    }
+    _select(editor, wordSeparators, findPreviousWordStart);
 }
 
 export function deleteWordRight(
     editor: TextEditor,
     wordSeparators: string
 ) {
-    return editor.edit(e => {
-        const document = editor.document;
-        let selections = editor.selections.map(
-            s => new Selection(
-                s.anchor,
-                findNextWordEnd(document, s.active, wordSeparators)
-            ));
-        for (let selection of selections) {
-            e.delete(selection);
-        }
-    }).then(() => {
-        if (editor.selections.length === 1) {
-            editor.revealRange(editor.selection);
-        }
-    });
+    return _delete(editor, wordSeparators, findNextWordEnd);
 }
 
 export function deleteWordLeft(
     editor: TextEditor,
     wordSeparators: string
 ) {
-    return editor.edit(e => {
-        const document = editor.document;
-        let selections = editor.selections.map(
-            s => new Selection(
-                s.anchor,
-                findPreviousWordStart(document, s.active, wordSeparators)
-            ));
-        for (let selection of selections) {
-            e.delete(selection);
-        }
-    }).then(() => {
-        if (editor.selections.length === 1) {
-            editor.revealRange(editor.selection);
-        }
-    });
+    return _delete(editor, wordSeparators, findPreviousWordStart);
 }
 
 //-----------------------------------------------------------------------------
