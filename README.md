@@ -27,6 +27,7 @@ The table below shows all available commands and their default keybindings:
 
 |                     Command                     |         Default Keybinding (except macOS)         |           Default keybinding (for macOS)            |
 | ----------------------------------------------- | ------------------------------------------------- | --------------------------------------------------- |
+| `japaneseWordHandler.cursorWordEndLeft`         |                                                   |                                                     |
 | `japaneseWordHandler.cursorWordEndRight`        | <kbd>Ctrl</kbd>+<kbd>Right</kbd>                  | <kbd>Option</kbd>+<kbd>Right</kbd>                  |
 | `japaneseWordHandler.cursorWordEndRightSelect`  | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Right</kbd> | <kbd>Option</kbd>+<kbd>Shift</kbd>+<kbd>Right</kbd> |
 | `japaneseWordHandler.cursorWordStartLeft`       | <kbd>Ctrl</kbd>+<kbd>Right</kbd>                  | <kbd>Option</kbd>+<kbd>Right</kbd>                  |
