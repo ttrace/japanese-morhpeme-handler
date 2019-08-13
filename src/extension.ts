@@ -149,14 +149,12 @@ function findNextWordEnd(
     caretPos: Position,
     wordSeparators: string
 ): Position {
-    // Brief spec of this function:
-    // - Firstly gets a character where the cursor is pointing at.
-    // - If no more character is in the line:
-    //   - (at EOL) seeks to the beginning the next line.
-    //   - (at EOD) does not move cursor.
-    // - If it's a WSP, skips a sequence of WSPs beginning with it.
-    //   - If skipped WSP(s) and reached EOL/EOD, stop seeking.
-    // - Secondly, seeks forward until character type changes.
+    // If the cursor is at an end-of-document, return original position.
+    // If the cursor is at an end-of-line, return position of the next line.
+    // If the cursor is at WSP character(s), skip the WSP(s) starting with it.
+    // If no characters exist after the WSPs, return the position.
+    // If there is a non-WSP character after the WSPs, return end position of
+    // a non-WSP character sequence which starts with it.
 
     const classify = makeClassifier(wordSeparators);
 
