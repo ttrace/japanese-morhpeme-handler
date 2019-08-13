@@ -12,20 +12,34 @@ Better cursor movement in Japanese text for [VS Code](https://code.visualstudio.
 ## How to activate the logic?
 
 Just install the extension. Doing so changes the action for the keybindings
-below:
+below (on macOS, use <kbd>Option</kbd> instead of <kbd>Ctrl</kbd>):
 
-* <kbd>Ctrl+Right</kbd> (or <kbd>Option+Right</kbd> on OSX)
-* <kbd>Ctrl+Left</kbd> (or <kbd>Option+Left</kbd> on OSX)
-* <kbd>Ctrl+Shift+Right</kbd> (or <kbd>Option+Shift+Right</kbd> on OSX)
-* <kbd>Ctrl+Shift+Left</kbd> (or <kbd>Option+Shift+Left</kbd> on OSX)
+* <kbd>Ctrl</kbd>+<kbd>Right</kbd>
+* <kbd>Ctrl</kbd>+<kbd>Left</kbd>
+* <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Right</kbd>
+* <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Left</kbd>
+* <kbd>Ctrl</kbd>+<kbd>Delete</kbd>
+* <kbd>Ctrl</kbd>+<kbd>Backspace</kbd>
 
-This extension does not add any command to the command platte.
+Although not visible in command platte, these actions are implemented as
+commands so that you can reassign any key combinations to them.
+The table below shows all available commands and their default keybindings:
+
+|                     Command                     |         Default Keybinding (except macOS)         |           Default keybinding (for macOS)            |
+| ----------------------------------------------- | ------------------------------------------------- | --------------------------------------------------- |
+| `japaneseWordHandler.cursorWordEndRight`        | <kbd>Ctrl</kbd>+<kbd>Right</kbd>                  | <kbd>Option</kbd>+<kbd>Right</kbd>                  |
+| `japaneseWordHandler.cursorWordEndRightSelect`  | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Right</kbd> | <kbd>Option</kbd>+<kbd>Shift</kbd>+<kbd>Right</kbd> |
+| `japaneseWordHandler.cursorWordStartLeft`       | <kbd>Ctrl</kbd>+<kbd>Right</kbd>                  | <kbd>Option</kbd>+<kbd>Right</kbd>                  |
+| `japaneseWordHandler.cursorWordStartLeftSelect` | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Right</kbd> | <kbd>Option</kbd>+<kbd>Shift</kbd>+<kbd>Right</kbd> |
+| `japaneseWordHandler.deleteWordRight`           | <kbd>Ctrl</kbd>+<kbd>Delete</kbd>                 | <kbd>⌥Option</kbd>+<kbd>Delete</kbd>                |
+| `japaneseWordHandler.deleteWordLeft`            | <kbd>Ctrl</kbd>+<kbd>Backspace</kbd>              | <kbd>⌥Option</kbd>+<kbd>Backspace</kbd>             |
+
 
 ## What's the difference from the original?
 
-With the original logic, pressing <kbd>Ctrl+Right</kbd> while the cursor is at
-the beginning of a chunk of Japanese characters will move the cursor to the end
-of it.
+With the original logic, pressing <kbd>Ctrl</kbd>+<kbd>Right</kbd> while the
+cursor is at the beginning of a chunk of Japanese characters will move the
+cursor to the end of it.
 
 ![Original cursor movement](images/japanese-word-handler-vanilla.gif)
 
@@ -36,7 +50,7 @@ where the Japanese character type (Hiragana, Katakana, ...) changes.
 
 ## Known limitations
 
-As of VSCode 1.27, extension cannot override word related actions below:
+As of VSCode 1.37.0, extension cannot override word related actions below:
 
 * Word selection on double click
 * Automatic highlight of a word at where the cursor is
@@ -44,7 +58,9 @@ As of VSCode 1.27, extension cannot override word related actions below:
 
 ## Issue report
 
-Please visit the [project's GitHub page](https://github.com/sgryjp/japanese-word-handler) and .
+Please visit the
+[project's GitHub page](https://github.com/sgryjp/japanese-word-handler)
+and report it.
 
 
 **Enjoy!**
