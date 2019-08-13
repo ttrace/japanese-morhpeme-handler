@@ -23,6 +23,7 @@ export function activate(context: vscode.ExtensionContext) {
     registerCommand('japaneseWordHandler.cursorWordEndRightSelect', cursorWordEndRightSelect);
     registerCommand('japaneseWordHandler.cursorWordStartLeft', cursorWordStartLeft);
     registerCommand('japaneseWordHandler.cursorWordStartLeftSelect', cursorWordStartLeftSelect);
+    registerCommand('japaneseWordHandler.cursorWordStartRight', cursorWordStartRight);
     registerCommand('japaneseWordHandler.deleteWordRight', deleteWordRight);
     registerCommand('japaneseWordHandler.deleteWordLeft', deleteWordLeft);
 
@@ -94,6 +95,13 @@ export function cursorWordEndRight(
     _move(editor, wordSeparators, findNextWordEnd);
 }
 
+export function cursorWordStartRight(
+    editor: TextEditor,
+    wordSeparators: string
+) {
+    _move(editor, wordSeparators, findNextWordStart);
+}
+
 export function cursorWordEndRightSelect(
     editor: TextEditor,
     wordSeparators: string
@@ -139,6 +147,48 @@ enum CharClass {
     Other,
     Separator,
     Invalid
+}
+
+/**
+ * Gets position of the start of a word after specified position.
+ */
+function findNextWordStart(
+    doc: TextDocument,
+    caretPos: Position,
+    wordSeparators: string
+): Position {
+    // If the cursor is at an end-of-document, return original position.
+    // If the cursor is at an end-of-line, return position of the next line.
+    // Find ending position of a sequence starting with the character at
+    // cursor. Then, return position of where WSPs following the sequence end.
+
+    const classify = makeClassifier(wordSeparators);
+
+    // Check if it's already at end-of-line or end-of-document
+    let klass = classify(doc, caretPos);
+    if (klass === CharClass.Invalid) {
+        const nextLine = caretPos.line + 1;
+        return (nextLine < doc.lineCount)
+            ? new Position(nextLine, 0) // end-of-line
+            : caretPos;                 // end-of-document
+    }
+
+    // Seek until character type changes, unless already reached EOL/EOD
+    let pos = caretPos;
+    klass = classify(doc, pos);
+    if (classify(doc, pos) !== CharClass.Invalid) {
+        do {
+            pos = new Position(pos.line, pos.character + 1);
+        }
+        while (klass === classify(doc, pos));
+    }
+
+    // Skip a series of whitespaces
+    while (classify(doc, pos) === CharClass.Whitespace) {
+        pos = new Position(pos.line, pos.character + 1);
+    }
+
+    return pos;
 }
 
 /**

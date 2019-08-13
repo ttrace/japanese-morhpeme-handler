@@ -8,6 +8,9 @@ The format is based on
 to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- New command `japaneseWordHandler.cursorWordStartRight`
+
 ### Change
 - Change command names to match built-in commands (old names can be used for compatibility but will be removed in future):
   |            Old Command Names            |                New Command Names                |

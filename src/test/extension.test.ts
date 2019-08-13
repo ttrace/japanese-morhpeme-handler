@@ -314,6 +314,112 @@ suite("japanese-word-handler", () => {
             });
     });
 
+    suite("cursorWordStartRight", () => {
+        const doMine = async function (
+            editor: TextEditor,
+            wordSeparators: string,
+            content: string
+        ) {
+            await setText(editor, content);
+            const initPos = new Position(0, 0);
+            editor.selections = [new Selection(initPos, initPos)];
+            await myExtension.cursorWordStartRight(editor, wordSeparators);
+            return editor.document.offsetAt(editor.selection.start);
+        };
+
+        const doTheirs = async function (
+            editor: TextEditor,
+            content: string
+        ) {
+            await setText(editor, content);
+            const initPos = new Position(0, 0);
+            editor.selections = [new Selection(initPos, initPos)];
+            await vscode.commands.executeCommand("cursorWordStartRight");
+            return editor.document.offsetAt(editor.selection.start);
+        };
+
+        [
+            { name: ".", input: "", expected: 0, compatible: true, },
+
+            { name: "A.", input: "aa", expected: 2, compatible: true, },
+            { name: "AH", input: "aaあ", expected: 2, compatible: false, },
+            { name: "AK", input: "aaア", expected: 2, compatible: false, },
+            { name: "AJ", input: "aa亜", expected: 2, compatible: false, },
+            { name: "AS.", input: "aa ", expected: 3, compatible: true, },
+            { name: "ASA", input: "aa a", expected: 3, compatible: true, },
+            { name: "ASH", input: "aa あ", expected: 3, compatible: true, },
+            { name: "ASL", input: "aa \n", expected: 3, compatible: true, },
+            { name: "AL", input: "aa\n", expected: 2, compatible: true, },
+
+            { name: "H.", input: "ああ", expected: 2, compatible: true, },
+            { name: "HA", input: "ああa", expected: 2, compatible: false, },
+            { name: "HK", input: "ああア", expected: 2, compatible: false, },
+            { name: "HJ", input: "ああ亜", expected: 2, compatible: false, },
+            { name: "HS.", input: "ああ ", expected: 3, compatible: true, },
+            { name: "HSA", input: "ああ a", expected: 3, compatible: true, },
+            { name: "HSH", input: "ああ あ", expected: 3, compatible: true, },
+            { name: "HSL", input: "ああ \n", expected: 3, compatible: true, },
+            { name: "HL", input: "ああ\n", expected: 2, compatible: true, },
+
+            { name: "K.", input: "アア", expected: 2, compatible: true, },
+            { name: "KA", input: "アアa", expected: 2, compatible: false, },
+            { name: "KH", input: "アアあ", expected: 2, compatible: false, },
+            { name: "KJ", input: "アア亜", expected: 2, compatible: false, },
+            { name: "KS.", input: "アア ", expected: 3, compatible: true, },
+            { name: "KSA", input: "アア a", expected: 3, compatible: true, },
+            { name: "KSH", input: "アア あ", expected: 3, compatible: true, },
+            { name: "KSL", input: "アア \n", expected: 3, compatible: true, },
+            { name: "KL", input: "アア\n", expected: 2, compatible: true, },
+
+            { name: "J.", input: "亜亜", expected: 2, compatible: true, },
+            { name: "JA", input: "亜亜a", expected: 2, compatible: false, },
+            { name: "JH", input: "亜亜あ", expected: 2, compatible: false, },
+            { name: "JK", input: "亜亜ア", expected: 2, compatible: false, },
+            { name: "JS.", input: "亜亜 ", expected: 3, compatible: true, },
+            { name: "JSA", input: "亜亜 a", expected: 3, compatible: true, },
+            { name: "JSH", input: "亜亜 あ", expected: 3, compatible: true, },
+            { name: "JSL", input: "亜亜 \n", expected: 3, compatible: true, },
+            { name: "JL", input: "亜亜\n", expected: 2, compatible: true, },
+
+            { name: "S.", input: "  ", expected: 2, compatible: true, },
+            { name: "SA", input: "  aa", expected: 2, compatible: true, },
+            { name: "SH", input: "  ああ", expected: 2, compatible: true, },
+            { name: "SK", input: "  アア", expected: 2, compatible: true, },
+            { name: "SJ", input: "  亜亜", expected: 2, compatible: true, },
+            { name: "SL", input: "  \n", expected: 2, compatible: true, },
+
+            { name: "L.", input: "\n", expected: 1, compatible: true, },
+            { name: "LA", input: "\na", expected: 1, compatible: true, },
+            { name: "LH", input: "\nあ", expected: 1, compatible: false },
+            { name: "LK", input: "\nア", expected: 1, compatible: false },
+            { name: "LJ", input: "\n亜", expected: 1, compatible: false },
+            { name: "LS", input: "\n ", expected: 1, compatible: false, },  //TODO: should be compatible
+            { name: "LL", input: "\n\n", expected: 1, compatible: true, },
+        ].forEach(t => {
+            test("cursorWordStartRight: " + t.name, async () => {
+                const editor = vscode.window.activeTextEditor!;
+                const mine = await doMine(editor, "", t.input);
+                if (mine !== t.expected) {
+                    assert.fail("Unexpected result: {" +
+                        escape`input: "${t.input}", ` +
+                        escape`expected: "${t.expected}", ` +
+                        escape`got: "${mine}"}`
+                    );
+                }
+                if (t.compatible) {
+                    const theirs = await doTheirs(editor, t.input);
+                    if (mine !== theirs) {
+                        assert.fail("Incompatible behavior: {" +
+                            escape`input: "${t.input}", ` +
+                            escape`mine: "${mine}", ` +
+                            escape`theirs: "${theirs}"}`
+                        );
+                    }
+                }
+            });
+        });
+    });
+
     suite("deleteWordRight", () => {
         const doMine = async function (
             editor: TextEditor,
