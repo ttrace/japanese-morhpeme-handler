@@ -88,6 +88,13 @@ function _delete(
     });
 }
 
+export function cursorWordEndLeft(
+    editor: TextEditor,
+    wordSeparators: string
+) {
+    _move(editor, wordSeparators, findPreviousWordEnd);
+}
+
 export function cursorWordEndRight(
     editor: TextEditor,
     wordSeparators: string
@@ -165,7 +172,7 @@ function findNextWordStart(
     const classify = makeClassifier(wordSeparators);
 
     // Check if it's already at end-of-line or end-of-document
-    let klass = classify(doc, caretPos);
+    let klass = classify(doc, caretPos.line, caretPos.character);
     if (klass === CharClass.Invalid) {
         const nextLine = caretPos.line + 1;
         return (nextLine < doc.lineCount)
@@ -175,16 +182,16 @@ function findNextWordStart(
 
     // Seek until character type changes, unless already reached EOL/EOD
     let pos = caretPos;
-    klass = classify(doc, pos);
-    if (classify(doc, pos) !== CharClass.Invalid) {
+    klass = classify(doc, pos.line, pos.character);
+    if (classify(doc, pos.line, pos.character) !== CharClass.Invalid) {
         do {
             pos = new Position(pos.line, pos.character + 1);
         }
-        while (klass === classify(doc, pos));
+        while (klass === classify(doc, pos.line, pos.character));
     }
 
     // Skip a series of whitespaces
-    while (classify(doc, pos) === CharClass.Whitespace) {
+    while (classify(doc, pos.line, pos.character) === CharClass.Whitespace) {
         pos = new Position(pos.line, pos.character + 1);
     }
 
@@ -209,7 +216,7 @@ function findNextWordEnd(
     const classify = makeClassifier(wordSeparators);
 
     // Check if it's already at end-of-line or end-of-document
-    let klass = classify(doc, caretPos);
+    let klass = classify(doc, caretPos.line, caretPos.character);
     if (klass === CharClass.Invalid) {
         const nextLine = caretPos.line + 1;
         return (nextLine < doc.lineCount)
@@ -223,16 +230,16 @@ function findNextWordEnd(
         do {
             pos = new Position(pos.line, pos.character + 1);
         }
-        while (classify(doc, pos) === CharClass.Whitespace);
+        while (classify(doc, pos.line, pos.character) === CharClass.Whitespace);
     }
 
     // Seek until character type changes, unless already reached EOL/EOD
-    klass = classify(doc, pos);
-    if (classify(doc, pos) !== CharClass.Invalid) {
+    klass = classify(doc, pos.line, pos.character);
+    if (classify(doc, pos.line, pos.character) !== CharClass.Invalid) {
         do {
             pos = new Position(pos.line, pos.character + 1);
         }
-        while (klass === classify(doc, pos));
+        while (klass === classify(doc, pos.line, pos.character));
     }
 
     return pos;
@@ -258,7 +265,7 @@ function findPreviousWordStart(
     // Firstly skip whitespaces, excluding EOL codes.
     function prevCharIsWhitespace() {
         let prevPos = doc.positionAt(doc.offsetAt(pos) - 1);
-        return (classify(doc, prevPos) === CharClass.Whitespace);
+        return (classify(doc, prevPos.line, prevPos.character) === CharClass.Whitespace);
     }
     let pos = caretPos;
     while (prevCharIsWhitespace()) {
@@ -272,15 +279,55 @@ function findPreviousWordStart(
 
     // Then, seek until the character type changes.
     pos = doc.positionAt(doc.offsetAt(pos) - 1);
-    const initKlass = classify(doc, pos);
+    const initKlass = classify(doc, pos.line, pos.character);
     let prevPos = doc.positionAt(doc.offsetAt(pos) - 1);
     while (prevPos.isBefore(pos)) {
-        if (initKlass !== classify(doc, prevPos)) {
+        if (initKlass !== classify(doc, prevPos.line, prevPos.character)) {
             break;
         }
 
         pos = prevPos;
         prevPos = doc.positionAt(doc.offsetAt(pos) - 1);
+    }
+
+    return pos;
+}
+
+/**
+ * Gets position of where a word before specified position ends.
+ */
+function findPreviousWordEnd(
+    doc: TextDocument,
+    caretPos: Position,
+    wordSeparators: string
+) {
+    const classify = makeClassifier(wordSeparators);
+
+    let pos = caretPos;
+    if (pos.character == 0) {
+        if (pos.line == 0) {
+            return pos;  // start of document
+        } else {
+            return doc.positionAt(doc.offsetAt(pos) - 1);  // start of a line
+        }
+    }
+    //assert 0 < pos.character
+
+    // Seek until character type changes, unless already reached EOL/EOD
+    let klass: CharClass;
+    let initKlass = classify(doc, pos.line, pos.character - 1);
+    do {
+        pos = new Position(pos.line, pos.character - 1);
+        klass = classify(doc, pos.line, pos.character - 1);
+    }
+    while (klass === initKlass);
+
+    if (klass == CharClass.Whitespace) {
+        do {
+            pos = new Position(pos.line, pos.character - 1);
+            klass = classify(doc, pos.line, pos.character - 1);
+        }
+        while (klass == CharClass.Whitespace);
     }
 
     return pos;
@@ -294,11 +341,16 @@ function findPreviousWordStart(
 function makeClassifier(wordSeparators: string) {
     return function classifyChar(
         doc: TextDocument,
-        position: Position
+        line: number,
+        character: number
     ) {
+        if (line < 0 || character < 0) {
+            return CharClass.Invalid;
+        }
+
         const range = new Range(
-            position.line, position.character,
-            position.line, position.character + 1
+            line, character,
+            line, character + 1
         );
         const text = doc.getText(range);
         if (text.length === 0) {

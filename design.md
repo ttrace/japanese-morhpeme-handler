@@ -60,6 +60,25 @@ we are discussing moves the cursor just after the sequence.
             A|L     @|L     S|L     L|L
     ```
 
+- `cursorWordEndLeft`
+  - Procedure:
+    1. If the cursor is at an start-of-document, return original position.
+    2. If the cursor is at an start-of-line, return end position of the
+       previous line.
+    3. Find starting position of a sequence which ends at the cursor position.
+       Then, return position of where WSPs preceding it starts.
+  - Illustration:
+    ```
+    .|   .|A     .|@    .|S     .|L
+                 A|@    A|S     A|L
+         @|A            @|S     @|L
+        .|SA    .|S@            S|L
+        A|SA    A|S@
+        @|SA    @|S@
+        L|SA    L|S@
+         L|A     L|@    L|S     L|L
+    ```
+
 There logic can be implemented as finite state automaton but I feel doing so is
 "overkill". So, I implemented these in a form of imperative procedures.
 
