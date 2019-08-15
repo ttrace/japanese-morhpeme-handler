@@ -12,7 +12,7 @@ Better cursor movement in Japanese text for [VS Code](https://code.visualstudio.
 ## How to activate the logic?
 
 Just install the extension. Doing so changes the action for the keybindings
-below (on macOS, use <kbd>Option</kbd> instead of <kbd>Ctrl</kbd>):
+below (on macOS, use <kbd>⌥Option</kbd> instead of <kbd>Ctrl</kbd>):
 
 * <kbd>Ctrl</kbd>+<kbd>Right</kbd>
 * <kbd>Ctrl</kbd>+<kbd>Left</kbd>
@@ -27,14 +27,19 @@ The table below shows all available commands and their default keybindings:
 
 |                     Command                     |         Default Keybinding (except macOS)         |           Default keybinding (for macOS)            |
 | ----------------------------------------------- | ------------------------------------------------- | --------------------------------------------------- |
-| `japaneseWordHandler.cursorWordEndLeft`         |                                                   |                                                     |
+| `japaneseWordHandler.cursorWordEndLeft`         | [*1]                                              | [*1]                                                |
 | `japaneseWordHandler.cursorWordEndRight`        | <kbd>Ctrl</kbd>+<kbd>Right</kbd>                  | <kbd>Option</kbd>+<kbd>Right</kbd>                  |
 | `japaneseWordHandler.cursorWordEndRightSelect`  | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Right</kbd> | <kbd>Option</kbd>+<kbd>Shift</kbd>+<kbd>Right</kbd> |
 | `japaneseWordHandler.cursorWordStartLeft`       | <kbd>Ctrl</kbd>+<kbd>Right</kbd>                  | <kbd>Option</kbd>+<kbd>Right</kbd>                  |
 | `japaneseWordHandler.cursorWordStartLeftSelect` | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Right</kbd> | <kbd>Option</kbd>+<kbd>Shift</kbd>+<kbd>Right</kbd> |
-| `japaneseWordHandler.cursorWordStartRight`      |                                                   |                                                     |
-| `japaneseWordHandler.deleteWordRight`           | <kbd>Ctrl</kbd>+<kbd>Delete</kbd>                 | <kbd>⌥Option</kbd>+<kbd>Delete</kbd>                |
-| `japaneseWordHandler.deleteWordLeft`            | <kbd>Ctrl</kbd>+<kbd>Backspace</kbd>              | <kbd>⌥Option</kbd>+<kbd>Backspace</kbd>             |
+| `japaneseWordHandler.cursorWordStartRight`      | [*1]                                              | [*1]                                                |
+| `japaneseWordHandler.deleteWordRight`           | <kbd>Ctrl</kbd>+<kbd>Delete</kbd>                 | <kbd>Option</kbd>+<kbd>Delete</kbd>                 |
+| `japaneseWordHandler.deleteWordLeft`            | <kbd>Ctrl</kbd>+<kbd>Backspace</kbd>              | <kbd>Option</kbd>+<kbd>Backspace</kbd>              |
+
+- [*1] <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>9</kbd> is assigned
+       for those commands so that they will appear in the Keyboard Shortcuts
+       editor of VSCode. If you want to use those commands, please reassign
+       other keybinding to them.
 
 
 ## What's the difference from the original?

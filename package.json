@@ -14,6 +14,7 @@
     "categories": [
         "Other"
     ],
+    "extensionKind": "ui",
     "license": "Zlib",
     "badges": [
         {
@@ -58,6 +59,7 @@
         "keybindings": [
             {
                 "command": "japaneseWordHandler.cursorWordEndLeft",
+                "key": "ctrl+alt+shift+9",
                 "when": "editorTextFocus"
             },
             {
@@ -86,6 +88,7 @@
             },
             {
                 "command": "japaneseWordHandler.cursorWordStartRight",
+                "key": "ctrl+alt+shift+9",
                 "when": "editorTextFocus"
             },
             {
