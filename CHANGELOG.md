@@ -22,8 +22,8 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
   | `extension.cursorNextWordEndSelectJa`   | `japaneseWordHandler.cursorWordEndRightSelect`  |
   | `extension.cursorPrevWordStartJa`       | `japaneseWordHandler.cursorWordStartLeft`       |
   | `extension.cursorPrevWordStartSelectJa` | `japaneseWordHandler.cursorWordStartLeftSelect` |
-  | `extension.deleteWordRight`             | `japaneseWordHandler.deleteWordRight`           |
-  | `extension.deleteWordLeft`              | `japaneseWordHandler.deleteWordLeft`            |
+  | `extension.deleteWordRight`             | `japaneseWordHandler.deleteWordEndRight`        |
+  | `extension.deleteWordLeft`              | `japaneseWordHandler.deleteWordStartLeft`       |
 
 ## [1.1.1] - 2018-10-17
 ### Fixed

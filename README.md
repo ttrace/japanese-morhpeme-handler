@@ -35,8 +35,8 @@ The table below shows all available commands and their default keybindings:
 | `japaneseWordHandler.cursorWordStartLeftSelect`  | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Right</kbd> | <kbd>Option</kbd>+<kbd>Shift</kbd>+<kbd>Right</kbd> |
 | `japaneseWordHandler.cursorWordStartRight`       | [*1]                                              | [*1]                                                |
 | `japaneseWordHandler.cursorWordStartRightSelect` | [*1]                                              | [*1]                                                |
-| `japaneseWordHandler.deleteWordRight`            | <kbd>Ctrl</kbd>+<kbd>Delete</kbd>                 | <kbd>Option</kbd>+<kbd>Delete</kbd>                 |
-| `japaneseWordHandler.deleteWordLeft`             | <kbd>Ctrl</kbd>+<kbd>Backspace</kbd>              | <kbd>Option</kbd>+<kbd>Backspace</kbd>              |
+| `japaneseWordHandler.deleteWordEndRight`         | <kbd>Ctrl</kbd>+<kbd>Delete</kbd>                 | <kbd>Option</kbd>+<kbd>Delete</kbd>                 |
+| `japaneseWordHandler.deleteWordStartLeft`        | <kbd>Ctrl</kbd>+<kbd>Backspace</kbd>              | <kbd>Option</kbd>+<kbd>Backspace</kbd>              |
 
 - [*1] <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>9</kbd> is assigned
        for those commands so that they will appear in the Keyboard Shortcuts

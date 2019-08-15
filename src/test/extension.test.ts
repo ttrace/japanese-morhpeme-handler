@@ -526,7 +526,7 @@ suite("japanese-word-handler", () => {
         });
     });
 
-    suite("deleteWordRight", () => {
+    suite("deleteWordEndRight", () => {
         const doMine = async function (
             editor: TextEditor,
             wordSeparators: string,
@@ -535,7 +535,7 @@ suite("japanese-word-handler", () => {
             await setText(editor, content);
             const initPos = new Position(0, 0);
             editor.selections = [new Selection(initPos, initPos)];
-            await myExtension.deleteWordRight(editor, wordSeparators);
+            await myExtension.deleteWordEndRight(editor, wordSeparators);
             return editor.document.getText();
         };
 
@@ -620,7 +620,7 @@ suite("japanese-word-handler", () => {
                     );
                 }
                 if (t.compatible) {
-                    const cmd = "deleteWordRight";
+                    const cmd = "deleteWordEndRight";
                     const theirs = await doTheirs(editor, cmd, t.input);
                     if (mine !== theirs) {
                         assert.fail("Incompatible behavior: {" +
@@ -648,7 +648,7 @@ suite("japanese-word-handler", () => {
             });
     });
 
-    suite("deleteWordLeft", () => {
+    suite("deleteWordStartLeft", () => {
         const doMine = async function (
             editor: TextEditor,
             wordSeparators: string,
@@ -658,7 +658,7 @@ suite("japanese-word-handler", () => {
             const initPos = editor.document.positionAt(
                 content.length * 2); // LFs may become CRLFs
             editor.selections = [new Selection(initPos, initPos)];
-            await myExtension.deleteWordLeft(editor, wordSeparators);
+            await myExtension.deleteWordStartLeft(editor, wordSeparators);
             return editor.document.getText();
         };
 
@@ -670,7 +670,7 @@ suite("japanese-word-handler", () => {
             const initPos = editor.document.positionAt(
                 content.length * 2); // LFs may become CRLFs
             editor.selections = [new Selection(initPos, initPos)];
-            await vscode.commands.executeCommand("deleteWordLeft");
+            await vscode.commands.executeCommand("deleteWordStartLeft");
             return editor.document.getText();
         };
 

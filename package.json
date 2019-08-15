@@ -47,14 +47,14 @@
         "onCommand:japaneseWordHandler.cursorWordStartLeftSelect",
         "onCommand:japaneseWordHandler.cursorWordStartRight",
         "onCommand:japaneseWordHandler.cursorWordStartRightSelect",
-        "onCommand:japaneseWordHandler.deleteWordRight",
-        "onCommand:japaneseWordHandler.deleteWordLeft",
+        "onCommand:japaneseWordHandler.deleteWordEndRight",
+        "onCommand:japaneseWordHandler.deleteWordStartLeft",
         "onCommand:extension.cursorNextWordEndJa",
         "onCommand:extension.cursorNextWordEndSelectJa",
         "onCommand:extension.cursorPrevWordStartJa",
         "onCommand:extension.cursorPrevWordStartSelectJa",
-        "onCommand:extension.deleteWordRight",
-        "onCommand:extension.deleteWordLeft"
+        "onCommand:extension.deleteWordEndRight",
+        "onCommand:extension.deleteWordStartLeft"
     ],
     "main": "./out/extension",
     "contributes": {
@@ -104,13 +104,13 @@
                 "when": "editorTextFocus"
             },
             {
-                "command": "japaneseWordHandler.deleteWordRight",
+                "command": "japaneseWordHandler.deleteWordEndRight",
                 "key": "ctrl+delete",
                 "mac": "alt+delete",
                 "when": "textInputFocus && !editorReadonly"
             },
             {
-                "command": "japaneseWordHandler.deleteWordLeft",
+                "command": "japaneseWordHandler.deleteWordStartLeft",
                 "key": "ctrl+backspace",
                 "mac": "alt+backspace",
                 "when": "textInputFocus && !editorReadonly"
