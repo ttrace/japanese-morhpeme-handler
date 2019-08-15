@@ -40,6 +40,7 @@
     ],
     "activationEvents": [
         "onCommand:japaneseWordHandler.cursorWordEndLeft",
+        "onCommand:japaneseWordHandler.cursorWordEndLeftSelect",
         "onCommand:japaneseWordHandler.cursorWordEndRight",
         "onCommand:japaneseWordHandler.cursorWordEndRightSelect",
         "onCommand:japaneseWordHandler.cursorWordStartLeft",
@@ -59,6 +60,11 @@
         "keybindings": [
             {
                 "command": "japaneseWordHandler.cursorWordEndLeft",
+                "key": "ctrl+alt+shift+9",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "japaneseWordHandler.cursorWordEndLeftSelect",
                 "key": "ctrl+alt+shift+9",
                 "when": "editorTextFocus"
             },
