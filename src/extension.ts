@@ -29,8 +29,8 @@ export function activate(context: vscode.ExtensionContext) {
     registerCommand('japaneseWordHandler.cursorWordStartRightSelect', cursorWordStartRightSelect);
     registerCommand('japaneseWordHandler.deleteWordEndLeft', deleteWordEndLeft);
     registerCommand('japaneseWordHandler.deleteWordEndRight', deleteWordEndRight);
-    registerCommand('japaneseWordHandler.deleteWordStartRight', deleteWordStartRight);
     registerCommand('japaneseWordHandler.deleteWordStartLeft', deleteWordStartLeft);
+    registerCommand('japaneseWordHandler.deleteWordStartRight', deleteWordStartRight);
 
     // Register legacy commands for compatibility
     registerCommand('extension.cursorWordEndRight', cursorWordEndRight);
@@ -93,88 +93,52 @@ function _delete(
     });
 }
 
-export function cursorWordEndLeft(
-    editor: TextEditor,
-    wordSeparators: string
-) {
+export function cursorWordEndLeft(editor: TextEditor, wordSeparators: string) {
     _move(editor, wordSeparators, findPreviousWordEnd);
 }
 
-export function cursorWordEndLeftSelect(
-    editor: TextEditor,
-    wordSeparators: string
-) {
+export function cursorWordEndLeftSelect(editor: TextEditor, wordSeparators: string) {
     _select(editor, wordSeparators, findPreviousWordEnd);
 }
 
-export function cursorWordEndRight(
-    editor: TextEditor,
-    wordSeparators: string
-) {
+export function cursorWordEndRight(editor: TextEditor, wordSeparators: string) {
     _move(editor, wordSeparators, findNextWordEnd);
 }
 
-export function cursorWordEndRightSelect(
-    editor: TextEditor,
-    wordSeparators: string
-) {
+export function cursorWordEndRightSelect(editor: TextEditor, wordSeparators: string) {
     _select(editor, wordSeparators, findNextWordEnd);
 }
 
-export function cursorWordStartRight(
-    editor: TextEditor,
-    wordSeparators: string
-) {
-    _move(editor, wordSeparators, findNextWordStart);
-}
-
-export function cursorWordStartRightSelect(
-    editor: TextEditor,
-    wordSeparators: string
-) {
-    _select(editor, wordSeparators, findNextWordStart);
-}
-
-export function cursorWordStartLeft(
-    editor: TextEditor,
-    wordSeparators: string
-) {
+export function cursorWordStartLeft(editor: TextEditor, wordSeparators: string) {
     _move(editor, wordSeparators, findPreviousWordStart);
 }
 
-export function cursorWordStartLeftSelect(
-    editor: TextEditor,
-    wordSeparators: string
-) {
+export function cursorWordStartLeftSelect(editor: TextEditor, wordSeparators: string) {
     _select(editor, wordSeparators, findPreviousWordStart);
 }
 
-export function deleteWordEndLeft(
-    editor: TextEditor,
-    wordSeparators: string
-) {
+export function cursorWordStartRight(editor: TextEditor, wordSeparators: string) {
+    _move(editor, wordSeparators, findNextWordStart);
+}
+
+export function cursorWordStartRightSelect(editor: TextEditor, wordSeparators: string) {
+    _select(editor, wordSeparators, findNextWordStart);
+}
+
+export function deleteWordEndLeft(editor: TextEditor, wordSeparators: string) {
     return _delete(editor, wordSeparators, findPreviousWordEnd);
 }
 
-export function deleteWordEndRight(
-    editor: TextEditor,
-    wordSeparators: string
-) {
+export function deleteWordEndRight(editor: TextEditor, wordSeparators: string) {
     return _delete(editor, wordSeparators, findNextWordEnd);
 }
 
-export function deleteWordStartRight(
-    editor: TextEditor,
-    wordSeparators: string
-) {
-    return _delete(editor, wordSeparators, findNextWordStart);
+export function deleteWordStartLeft(editor: TextEditor, wordSeparators: string) {
+    return _delete(editor, wordSeparators, findPreviousWordStart);
 }
 
-export function deleteWordStartLeft(
-    editor: TextEditor,
-    wordSeparators: string
-) {
-    return _delete(editor, wordSeparators, findPreviousWordStart);
+export function deleteWordStartRight(editor: TextEditor, wordSeparators: string) {
+    return _delete(editor, wordSeparators, findNextWordStart);
 }
 
 //-----------------------------------------------------------------------------
