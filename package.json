@@ -49,6 +49,7 @@
         "onCommand:japaneseWordHandler.cursorWordStartRightSelect",
         "onCommand:japaneseWordHandler.deleteWordEndRight",
         "onCommand:japaneseWordHandler.deleteWordStartLeft",
+        "onCommand:japaneseWordHandler.deleteWordStartRight",
         "onCommand:extension.cursorNextWordEndJa",
         "onCommand:extension.cursorNextWordEndSelectJa",
         "onCommand:extension.cursorPrevWordStartJa",
@@ -113,6 +114,11 @@
                 "command": "japaneseWordHandler.deleteWordStartLeft",
                 "key": "ctrl+backspace",
                 "mac": "alt+backspace",
+                "when": "textInputFocus && !editorReadonly"
+            },
+            {
+                "command": "japaneseWordHandler.deleteWordStartRight",
+                "key": "ctrl+alt+shift+9",
                 "when": "textInputFocus && !editorReadonly"
             }
         ]

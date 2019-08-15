@@ -36,6 +36,7 @@ The table below shows all available commands and their default keybindings:
 | `japaneseWordHandler.cursorWordStartRight`       | [*1]                                              | [*1]                                                |
 | `japaneseWordHandler.cursorWordStartRightSelect` | [*1]                                              | [*1]                                                |
 | `japaneseWordHandler.deleteWordEndRight`         | <kbd>Ctrl</kbd>+<kbd>Delete</kbd>                 | <kbd>Option</kbd>+<kbd>Delete</kbd>                 |
+| `japaneseWordHandler.deleteWordStartRight`       | [*1]                                              | [*1]                                                |
 | `japaneseWordHandler.deleteWordStartLeft`        | <kbd>Ctrl</kbd>+<kbd>Backspace</kbd>              | <kbd>Option</kbd>+<kbd>Backspace</kbd>              |
 
 - [*1] <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>9</kbd> is assigned
