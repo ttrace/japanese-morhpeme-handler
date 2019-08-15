@@ -13,6 +13,7 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 - New command `japaneseWordHandler.cursorWordStartRightSelect`
 - New command `japaneseWordHandler.cursorWordEndLeft`
 - New command `japaneseWordHandler.cursorWordEndLeftSelect`
+- New command `japaneseWordHandler.deleteWordEndLeft`
 - New command `japaneseWordHandler.deleteWordStartRight`
 
 ### Change
