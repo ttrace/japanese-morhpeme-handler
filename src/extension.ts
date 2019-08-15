@@ -26,6 +26,7 @@ export function activate(context: vscode.ExtensionContext) {
     registerCommand('japaneseWordHandler.cursorWordStartLeft', cursorWordStartLeft);
     registerCommand('japaneseWordHandler.cursorWordStartLeftSelect', cursorWordStartLeftSelect);
     registerCommand('japaneseWordHandler.cursorWordStartRight', cursorWordStartRight);
+    registerCommand('japaneseWordHandler.cursorWordStartRightSelect', cursorWordStartRightSelect);
     registerCommand('japaneseWordHandler.deleteWordRight', deleteWordRight);
     registerCommand('japaneseWordHandler.deleteWordLeft', deleteWordLeft);
 
@@ -111,6 +112,13 @@ export function cursorWordEndRight(
     _move(editor, wordSeparators, findNextWordEnd);
 }
 
+export function cursorWordEndRightSelect(
+    editor: TextEditor,
+    wordSeparators: string
+) {
+    _select(editor, wordSeparators, findNextWordEnd);
+}
+
 export function cursorWordStartRight(
     editor: TextEditor,
     wordSeparators: string
@@ -118,11 +126,11 @@ export function cursorWordStartRight(
     _move(editor, wordSeparators, findNextWordStart);
 }
 
-export function cursorWordEndRightSelect(
+export function cursorWordStartRightSelect(
     editor: TextEditor,
     wordSeparators: string
 ) {
-    _select(editor, wordSeparators, findNextWordEnd);
+    _select(editor, wordSeparators, findNextWordStart);
 }
 
 export function cursorWordStartLeft(

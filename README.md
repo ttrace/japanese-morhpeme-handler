@@ -25,17 +25,18 @@ Although not visible in command platte, these actions are implemented as
 commands so that you can reassign any key combinations to them.
 The table below shows all available commands and their default keybindings:
 
-|                     Command                     |         Default Keybinding (except macOS)         |           Default keybinding (for macOS)            |
-| ----------------------------------------------- | ------------------------------------------------- | --------------------------------------------------- |
-| `japaneseWordHandler.cursorWordEndLeft`         | [*1]                                              | [*1]                                                |
-| `japaneseWordHandler.cursorWordEndLeftSelect`   | [*1]                                              | [*1]                                                |
-| `japaneseWordHandler.cursorWordEndRight`        | <kbd>Ctrl</kbd>+<kbd>Right</kbd>                  | <kbd>Option</kbd>+<kbd>Right</kbd>                  |
-| `japaneseWordHandler.cursorWordEndRightSelect`  | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Right</kbd> | <kbd>Option</kbd>+<kbd>Shift</kbd>+<kbd>Right</kbd> |
-| `japaneseWordHandler.cursorWordStartLeft`       | <kbd>Ctrl</kbd>+<kbd>Right</kbd>                  | <kbd>Option</kbd>+<kbd>Right</kbd>                  |
-| `japaneseWordHandler.cursorWordStartLeftSelect` | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Right</kbd> | <kbd>Option</kbd>+<kbd>Shift</kbd>+<kbd>Right</kbd> |
-| `japaneseWordHandler.cursorWordStartRight`      | [*1]                                              | [*1]                                                |
-| `japaneseWordHandler.deleteWordRight`           | <kbd>Ctrl</kbd>+<kbd>Delete</kbd>                 | <kbd>Option</kbd>+<kbd>Delete</kbd>                 |
-| `japaneseWordHandler.deleteWordLeft`            | <kbd>Ctrl</kbd>+<kbd>Backspace</kbd>              | <kbd>Option</kbd>+<kbd>Backspace</kbd>              |
+|                     Command                      |         Default Keybinding (except macOS)         |           Default keybinding (for macOS)            |
+| ------------------------------------------------ | ------------------------------------------------- | --------------------------------------------------- |
+| `japaneseWordHandler.cursorWordEndLeft`          | [*1]                                              | [*1]                                                |
+| `japaneseWordHandler.cursorWordEndLeftSelect`    | [*1]                                              | [*1]                                                |
+| `japaneseWordHandler.cursorWordEndRight`         | <kbd>Ctrl</kbd>+<kbd>Right</kbd>                  | <kbd>Option</kbd>+<kbd>Right</kbd>                  |
+| `japaneseWordHandler.cursorWordEndRightSelect`   | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Right</kbd> | <kbd>Option</kbd>+<kbd>Shift</kbd>+<kbd>Right</kbd> |
+| `japaneseWordHandler.cursorWordStartLeft`        | <kbd>Ctrl</kbd>+<kbd>Right</kbd>                  | <kbd>Option</kbd>+<kbd>Right</kbd>                  |
+| `japaneseWordHandler.cursorWordStartLeftSelect`  | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Right</kbd> | <kbd>Option</kbd>+<kbd>Shift</kbd>+<kbd>Right</kbd> |
+| `japaneseWordHandler.cursorWordStartRight`       | [*1]                                              | [*1]                                                |
+| `japaneseWordHandler.cursorWordStartRightSelect` | [*1]                                              | [*1]                                                |
+| `japaneseWordHandler.deleteWordRight`            | <kbd>Ctrl</kbd>+<kbd>Delete</kbd>                 | <kbd>Option</kbd>+<kbd>Delete</kbd>                 |
+| `japaneseWordHandler.deleteWordLeft`             | <kbd>Ctrl</kbd>+<kbd>Backspace</kbd>              | <kbd>Option</kbd>+<kbd>Backspace</kbd>              |
 
 - [*1] <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>9</kbd> is assigned
        for those commands so that they will appear in the Keyboard Shortcuts
