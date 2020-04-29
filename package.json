@@ -9,7 +9,7 @@
         "url": "https://github.com/sgryjp/japanese-word-handler.git"
     },
     "engines": {
-        "vscode": "^1.22.0"
+        "vscode": "^1.44.0"
     },
     "categories": [
         "Other"
