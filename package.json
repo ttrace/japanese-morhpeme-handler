@@ -110,24 +110,24 @@
             {
                 "command": "japaneseWordHandler.deleteWordEndLeft",
                 "key": "ctrl+alt+shift+9",
-                "when": "textInputFocus && !editorReadonly"
+                "when": "editorTextFocus && !editorReadonly"
             },
             {
                 "command": "japaneseWordHandler.deleteWordEndRight",
                 "key": "ctrl+delete",
                 "mac": "alt+delete",
-                "when": "textInputFocus && !editorReadonly"
+                "when": "editorTextFocus && !editorReadonly"
             },
             {
                 "command": "japaneseWordHandler.deleteWordStartLeft",
                 "key": "ctrl+backspace",
                 "mac": "alt+backspace",
-                "when": "textInputFocus && !editorReadonly"
+                "when": "editorTextFocus && !editorReadonly"
             },
             {
                 "command": "japaneseWordHandler.deleteWordStartRight",
                 "key": "ctrl+alt+shift+9",
-                "when": "textInputFocus && !editorReadonly"
+                "when": "editorTextFocus && !editorReadonly"
             }
         ]
     },
