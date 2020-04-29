@@ -7,6 +7,10 @@ The format is based on
 [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) this project adheres
 to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.2.1] - 2020-04-29
+### Fixed
+- Now word deletion won't be triggered when user does not focus file editing window (#5)
+
 ## [1.2.0] - 2019-08-15
 ### Added
 - New command `japaneseWordHandler.cursorWordEndLeft`
