@@ -301,8 +301,8 @@ function findPreviousWordEnd(
     const classify = makeClassifier(wordSeparators);
 
     let pos = caretPos;
-    if (pos.character == 0) {
-        if (pos.line == 0) {
+    if (pos.character === 0) {
+        if (pos.line === 0) {
             return pos;  // start of document
         } else {
             return doc.positionAt(doc.offsetAt(pos) - 1);  // start of a line
@@ -319,12 +319,12 @@ function findPreviousWordEnd(
     }
     while (klass === initKlass);
 
-    if (klass == CharClass.Whitespace) {
+    if (klass === CharClass.Whitespace) {
         do {
             pos = new Position(pos.line, pos.character - 1);
             klass = classify(doc, pos.line, pos.character - 1);
         }
-        while (klass == CharClass.Whitespace);
+        while (klass === CharClass.Whitespace);
     }
 
     return pos;
