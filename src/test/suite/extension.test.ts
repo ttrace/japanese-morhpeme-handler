@@ -4,7 +4,7 @@ import * as assert from 'assert';
 import * as vscode from 'vscode';
 import { Position, Range, Selection, TextEditor, TextEditorEdit, EndOfLine } from 'vscode';
 
-import * as myExtension from '../extension';
+import * as myExtension from '../../extension';
 
 
 suite("japanese-word-handler", () => {
