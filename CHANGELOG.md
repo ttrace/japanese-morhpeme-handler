@@ -10,6 +10,8 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 <!-- markdownlint-disable MD022 MD024 MD032 MD033 -->
 
 ## [Unreleased]
+
+## [1.2.2] - 2020-11-06
 ### Fixed
 - Update dependencies to suppress vulnerability warnings (affects developer only)
 
