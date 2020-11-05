@@ -7,6 +7,8 @@ The format is based on
 [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) this project adheres
 to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+<!-- markdownlint-disable MD022 MD024 MD032 MD033 -->
+
 ## [Unreleased]
 ### Fixed
 - Update dependencies to suppress vulnerability warnings (affects developer only)
