@@ -17,7 +17,8 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [1.2.1] - 2020-04-29
 ### Fixed
-- Now word deletion won't be triggered when user does not focus file editing window (#5)
+- Now word deletion won't be triggered when user does not focus file editing window
+  ([Issue #5](https://github.com/sgryjp/japanese-word-handler/issues/5))
 
 ## [1.2.0] - 2019-08-15
 ### Added
