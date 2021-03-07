@@ -11,10 +11,10 @@ Through out this document, I use these symbols:
 | Symbol | Meaning                    |
 | ------ | -------------------------- |
 | `.`    | EOF                        |
-| `A`    | Alphabets and Numbers      |
+| `A`    | Alphabets and numbers      |
 | `@`    | One of the "wordSeparator" |
 | `S`    | Whitespace                 |
-| `L`    | End of Line                |
+| `L`    | End of line                |
 
 Additionally, location of the cursor after executing a command is expressed by
 vertical bar (`|`) symbol in a sequence of symbols. For example, `A|.` means
