@@ -19,7 +19,7 @@ Through out this document, I use these symbols:
 | ------ | -------------------------- |
 | `▮`    | EOF                        |
 | `A`    | Alphabets and numbers      |
-| `@`    | One of the "wordSeparator" |
+| `.`    | One of the "wordSeparator" |
 | `␣`    | Whitespace                 |
 | `⏎`    | End of line                |
 
@@ -42,14 +42,14 @@ we are discussing moves the cursor just after the sequence.
        a non-WSP character sequence which starts with it.
   - Illustration:
     ```text
-    |▮      A|▮     @|▮     ␣|▮     ⏎|▮
-                    @|A     ␣A|▮    ⏎|A
-                            ␣A|@
+    |▮      A|▮     .|▮     ␣|▮     ⏎|▮
+                    .|A     ␣A|▮    ⏎|A
+                            ␣A|.
                             ␣A|␣
                             ␣A|⏎
-            A|@             ␣|@     ⏎|@
-            A|␣     @|␣             ⏎|␣
-            A|⏎     @|⏎     ␣|⏎     ⏎|⏎
+            A|.             ␣|.     ⏎|.
+            A|␣     .|␣             ⏎|␣
+            A|⏎     .|⏎     ␣|⏎     ⏎|⏎
     ```
 
 - `cursorWordStartRight`
@@ -61,14 +61,14 @@ we are discussing moves the cursor just after the sequence.
        cursor. Then, return position of where WSPs following the sequence end.
   - Illustration:
     ```text
-    |▮      A|▮     @|▮     ␣|▮     ⏎|▮
-                    @|A     ␣|A     ⏎|A
-            A|@             ␣|@     ⏎|@
-            A␣|▮    @␣|▮            ⏎|␣
-            A␣|A    @␣|A
-            A␣|@    @␣|@
-            A␣|⏎    @␣|⏎
-            A|⏎     @|⏎     ␣|⏎     ⏎|⏎
+    |▮      A|▮     .|▮     ␣|▮     ⏎|▮
+                    .|A     ␣|A     ⏎|A
+            A|.             ␣|.     ⏎|.
+            A␣|▮    .␣|▮            ⏎|␣
+            A␣|A    .␣|A
+            A␣|.    .␣|.
+            A␣|⏎    .␣|⏎
+            A|⏎     .|⏎     ␣|⏎     ⏎|⏎
     ```
 
 - `cursorWordEndLeft`
@@ -81,14 +81,14 @@ we are discussing moves the cursor just after the sequence.
        Then, return position of where WSPs preceding it starts.
   - Illustration:
     ```text
-    ▮|   ▮|A     ▮|@    ▮|␣     ▮|⏎
-                 A|@    A|␣     A|⏎
-         @|A            @|␣     @|⏎
-        ▮|␣A    ▮|␣@            ␣|⏎
-        A|␣A    A|␣@
-        @|␣A    @|␣@
-        ⏎|␣A    ⏎|␣@
-        ⏎|A     ⏎|@    ⏎|␣     ⏎|⏎
+    ▮|   ▮|A     ▮|.    ▮|␣     ▮|⏎
+                 A|.    A|␣     A|⏎
+         .|A            .|␣     .|⏎
+        ▮|␣A    ▮|␣.            ␣|⏎
+        A|␣A    A|␣.
+        .|␣A    .|␣.
+        ⏎|␣A    ⏎|␣.
+        ⏎|A     ⏎|.    ⏎|␣     ⏎|⏎
     ```
 
 There logic can be implemented as finite state automaton but I feel doing so is
@@ -114,36 +114,36 @@ by "wordSeparator" configuration.
   ```text
   |▮          ⏎|▮
   A|▮         ⏎A|▮
-  A|@         ⏎A|@
+  A|.         ⏎A|.
   A|␣         ⏎A|␣
   A|⏎         ⏎A|⏎
-  @|▮         ⏎@|▮
-  @|A         ⏎@|A
-  @|␣         ⏎@|␣
-  @|⏎         ⏎@|⏎
+  .|▮         ⏎.|▮
+  .|A         ⏎.|A
+  .|␣         ⏎.|␣
+  .|⏎         ⏎.|⏎
   ␣|▮         ⏎␣|▮
   ␣A|▮        ⏎␣A|▮
-  ␣A|@        ⏎␣A|@
+  ␣A|.        ⏎␣A|.
   ␣A|␣        ⏎␣A|␣
   ␣A|⏎        ⏎␣A|⏎
-  ␣@|▮        ⏎␣@|▮
-  ␣@|A        ⏎␣@|A
-  ␣@|␣        ⏎␣@|␣
-  ␣@|⏎        ⏎␣@|⏎
+  ␣.|▮        ⏎␣.|▮
+  ␣.|A        ⏎␣.|A
+  ␣.|␣        ⏎␣.|␣
+  ␣.|⏎        ⏎␣.|⏎
   ␣|⏎         ⏎␣|⏎
               ⏎|⏎
   ```
 
 - `cursorWordStartRight`
   ```text
-  |▮      A|▮     @|▮             ⏎|▮
-                  @|A             ⏎|A
-          A|@                     ⏎|@
-          A␣|▮    @␣|▮    ␣|▮     ⏎␣|▮
-          A␣|A    @␣|A    ␣|A     ⏎␣|A
-          A␣|@    @␣|@    ␣|@     ⏎␣|@
-          A␣|⏎    @␣|⏎    ␣|⏎     ⏎␣|⏎
-          A|⏎     @|⏎             ⏎|⏎
+  |▮      A|▮     .|▮             ⏎|▮
+                  .|A             ⏎|A
+          A|.                     ⏎|.
+          A␣|▮    .␣|▮    ␣|▮     ⏎␣|▮
+          A␣|A    .␣|A    ␣|A     ⏎␣|A
+          A␣|.    .␣|.    ␣|.     ⏎␣|.
+          A␣|⏎    .␣|⏎    ␣|⏎     ⏎␣|⏎
+          A|⏎     .|⏎             ⏎|⏎
   ```
 
 ### Word part version
