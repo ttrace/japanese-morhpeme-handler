@@ -1,3 +1,5 @@
+<!-- markdownlint-disable MD031 -->
+
 # Design Notes
 
 This is a personal memo.
@@ -6,13 +8,13 @@ This is a personal memo.
 
 Through out this document, I use these symbols:
 
-| Symbol |             Meaning              |
-| ------ | -------------------------------- |
-| `.`    | EOF                              |
-| `A`    | Alphabets and Numbers            |
-| `@`    | One of the "wordSeparator"       |
-| `S`    | Whitespace                       |
-| `L`    | End of Line                      |
+| Symbol | Meaning                    |
+| ------ | -------------------------- |
+| `.`    | EOF                        |
+| `A`    | Alphabets and Numbers      |
+| `@`    | One of the "wordSeparator" |
+| `S`    | Whitespace                 |
+| `L`    | End of Line                |
 
 Additionally, location of the cursor after executing a command is expressed by
 vertical bar (`|`) symbol in a sequence of symbols. For example, `A|.` means
@@ -23,6 +25,7 @@ we are discussing moves the cursor just after the sequence.
 ## Japanese-Word-Handler
 
 - `cursorWordRight`
+
   - Procedure
     1. If the cursor is at an end-of-document, return original position.
     2. If the cursor is at an end-of-line, return position of the next line.
@@ -31,7 +34,7 @@ we are discussing moves the cursor just after the sequence.
     5. If there is a non-WSP character after the WSPs, return end position of
        a non-WSP character sequence which starts with it.
   - Illustration:
-    ```
+    ```text
     |.      A|.     @|.     S|.     L|.
                     @|A     SA|.    L|A
                             SA|@
@@ -43,13 +46,14 @@ we are discussing moves the cursor just after the sequence.
     ```
 
 - `cursorWordStartRight`
+
   - Procedure
     1. If the cursor is at an end-of-document, return original position.
     2. If the cursor is at an end-of-line, return position of the next line.
     3. Find ending position of a sequence starting with the character at
        cursor. Then, return position of where WSPs following the sequence end.
   - Illustration:
-    ```
+    ```text
     |.      A|.     @|.     S|.     L|.
                     @|A     S|A     L|A
             A|@             S|@     L|@
@@ -61,6 +65,7 @@ we are discussing moves the cursor just after the sequence.
     ```
 
 - `cursorWordEndLeft`
+
   - Procedure:
     1. If the cursor is at an start-of-document, return original position.
     2. If the cursor is at an start-of-line, return end position of the
@@ -68,7 +73,7 @@ we are discussing moves the cursor just after the sequence.
     3. Find starting position of a sequence which ends at the cursor position.
        Then, return position of where WSPs preceding it starts.
   - Illustration:
-    ```
+    ```text
     .|   .|A     .|@    .|S     .|L
                  A|@    A|S     A|L
          @|A            @|S     @|L
@@ -98,42 +103,41 @@ by "wordSeparator" configuration.
 ### Non "word part" version
 
 - `cursorWordEndRight`
-    ```
-    |.          L|.
-    A|.         LA|.
-    A|@         LA|@
-    A|S         LA|S
-    A|L         LA|L
-    @|.         L@|.
-    @|A         L@|A
-    @|S         L@|S
-    @|L         L@|L
-    S|.         LS|.
-    SA|.        LSA|.
-    SA|@        LSA|@
-    SA|S        LSA|S
-    SA|L        LSA|L
-    S@|.        LS@|.
-    S@|A        LS@|A
-    S@|S        LS@|S
-    S@|L        LS@|L
-    S|L         LS|L
-                L|L
-    ```
+
+  ```text
+  |.          L|.
+  A|.         LA|.
+  A|@         LA|@
+  A|S         LA|S
+  A|L         LA|L
+  @|.         L@|.
+  @|A         L@|A
+  @|S         L@|S
+  @|L         L@|L
+  S|.         LS|.
+  SA|.        LSA|.
+  SA|@        LSA|@
+  SA|S        LSA|S
+  SA|L        LSA|L
+  S@|.        LS@|.
+  S@|A        LS@|A
+  S@|S        LS@|S
+  S@|L        LS@|L
+  S|L         LS|L
+              L|L
+  ```
 
 - `cursorWordStartRight`
-
-    ```
-    |.      A|.     @|.             L|.
-                    @|A             L|A
-            A|@                     L|@
-            AS|.    @S|.    S|.     LS|.
-            AS|A    @S|A    S|A     LS|A
-            AS|@    @S|@    S|@     LS|@
-            AS|L    @S|L    S|L     LS|L
-            A|L     @|L             L|L
-    ```
-
+  ```text
+  |.      A|.     @|.             L|.
+                  @|A             L|A
+          A|@                     L|@
+          AS|.    @S|.    S|.     LS|.
+          AS|A    @S|A    S|A     LS|A
+          AS|@    @S|@    S|@     LS|@
+          AS|L    @S|L    S|L     LS|L
+          A|L     @|L             L|L
+  ```
 
 ### Word part version
 
