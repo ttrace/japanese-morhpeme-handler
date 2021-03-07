@@ -4,6 +4,13 @@
 
 This is a personal memo.
 
+Note: Some not-so-popular Unicode characters are used. Recommended fonts to see
+this document are:
+
+- [Hack][hack]
+- [Fira Code][fira-code]
+- [Cascadia Code][cascadia-code]
+
 ## Symbols Used in This Document
 
 Through out this document, I use these symbols:
@@ -13,7 +20,7 @@ Through out this document, I use these symbols:
 | `.`    | EOF                        |
 | `A`    | Alphabets and numbers      |
 | `@`    | One of the "wordSeparator" |
-| `S`    | Whitespace                 |
+| `␣`    | Whitespace                 |
 | `L`    | End of line                |
 
 Additionally, location of the cursor after executing a command is expressed by
@@ -35,14 +42,14 @@ we are discussing moves the cursor just after the sequence.
        a non-WSP character sequence which starts with it.
   - Illustration:
     ```text
-    |.      A|.     @|.     S|.     L|.
-                    @|A     SA|.    L|A
-                            SA|@
-                            SA|S
-                            SA|L
-            A|@             S|@     L|@
-            A|S     @|S             L|S
-            A|L     @|L     S|L     L|L
+    |.      A|.     @|.     ␣|.     L|.
+                    @|A     ␣A|.    L|A
+                            ␣A|@
+                            ␣A|␣
+                            ␣A|L
+            A|@             ␣|@     L|@
+            A|␣     @|␣             L|␣
+            A|L     @|L     ␣|L     L|L
     ```
 
 - `cursorWordStartRight`
@@ -54,14 +61,14 @@ we are discussing moves the cursor just after the sequence.
        cursor. Then, return position of where WSPs following the sequence end.
   - Illustration:
     ```text
-    |.      A|.     @|.     S|.     L|.
-                    @|A     S|A     L|A
-            A|@             S|@     L|@
-            AS|.    @S|.            L|S
-            AS|A    @S|A
-            AS|@    @S|@
-            AS|L    @S|L
-            A|L     @|L     S|L     L|L
+    |.      A|.     @|.     ␣|.     L|.
+                    @|A     ␣|A     L|A
+            A|@             ␣|@     L|@
+            A␣|.    @␣|.            L|␣
+            A␣|A    @␣|A
+            A␣|@    @␣|@
+            A␣|L    @␣|L
+            A|L     @|L     ␣|L     L|L
     ```
 
 - `cursorWordEndLeft`
@@ -74,14 +81,14 @@ we are discussing moves the cursor just after the sequence.
        Then, return position of where WSPs preceding it starts.
   - Illustration:
     ```text
-    .|   .|A     .|@    .|S     .|L
-                 A|@    A|S     A|L
-         @|A            @|S     @|L
-        .|SA    .|S@            S|L
-        A|SA    A|S@
-        @|SA    @|S@
-        L|SA    L|S@
-         L|A     L|@    L|S     L|L
+    .|   .|A     .|@    .|␣     .|L
+                 A|@    A|␣     A|L
+         @|A            @|␣     @|L
+        .|␣A    .|␣@            ␣|L
+        A|␣A    A|␣@
+        @|␣A    @|␣@
+        L|␣A    L|␣@
+        L|A     L|@    L|␣     L|L
     ```
 
 There logic can be implemented as finite state automaton but I feel doing so is
@@ -108,22 +115,22 @@ by "wordSeparator" configuration.
   |.          L|.
   A|.         LA|.
   A|@         LA|@
-  A|S         LA|S
+  A|␣         LA|␣
   A|L         LA|L
   @|.         L@|.
   @|A         L@|A
-  @|S         L@|S
+  @|␣         L@|␣
   @|L         L@|L
-  S|.         LS|.
-  SA|.        LSA|.
-  SA|@        LSA|@
-  SA|S        LSA|S
-  SA|L        LSA|L
-  S@|.        LS@|.
-  S@|A        LS@|A
-  S@|S        LS@|S
-  S@|L        LS@|L
-  S|L         LS|L
+  ␣|.         L␣|.
+  ␣A|.        L␣A|.
+  ␣A|@        L␣A|@
+  ␣A|␣        L␣A|␣
+  ␣A|L        L␣A|L
+  ␣@|.        L␣@|.
+  ␣@|A        L␣@|A
+  ␣@|␣        L␣@|␣
+  ␣@|L        L␣@|L
+  ␣|L         L␣|L
               L|L
   ```
 
@@ -132,10 +139,10 @@ by "wordSeparator" configuration.
   |.      A|.     @|.             L|.
                   @|A             L|A
           A|@                     L|@
-          AS|.    @S|.    S|.     LS|.
-          AS|A    @S|A    S|A     LS|A
-          AS|@    @S|@    S|@     LS|@
-          AS|L    @S|L    S|L     LS|L
+          A␣|.    @␣|.    ␣|.     L␣|.
+          A␣|A    @␣|A    ␣|A     L␣|A
+          A␣|@    @␣|@    ␣|@     L␣|@
+          A␣|L    @␣|L    ␣|L     L␣|L
           A|L     @|L             L|L
   ```
 
@@ -176,3 +183,7 @@ so those are always separated from other character types.
   - [`fwd_word()`](https://github.com/vim/vim/blob/v8.1.1843/src/search.c#L3050)
 - src/mbyte.c
   - [`utf_class()`](https://github.com/vim/vim/blob/v8.1.1843/src/mbyte.c#L2764)
+
+[hack]: https://sourcefoundry.org/hack/
+[fira-code]: https://github.com/tonsky/FiraCode
+[cascadia-code]: https://github.com/microsoft/cascadia-code
