@@ -17,7 +17,7 @@ Through out this document, I use these symbols:
 
 | Symbol | Meaning                    |
 | ------ | -------------------------- |
-| `.`    | EOF                        |
+| `▮`    | EOF                        |
 | `A`    | Alphabets and numbers      |
 | `@`    | One of the "wordSeparator" |
 | `␣`    | Whitespace                 |
@@ -42,8 +42,8 @@ we are discussing moves the cursor just after the sequence.
        a non-WSP character sequence which starts with it.
   - Illustration:
     ```text
-    |.      A|.     @|.     ␣|.     ⏎|.
-                    @|A     ␣A|.    ⏎|A
+    |▮      A|▮     @|▮     ␣|▮     ⏎|▮
+                    @|A     ␣A|▮    ⏎|A
                             ␣A|@
                             ␣A|␣
                             ␣A|⏎
@@ -61,10 +61,10 @@ we are discussing moves the cursor just after the sequence.
        cursor. Then, return position of where WSPs following the sequence end.
   - Illustration:
     ```text
-    |.      A|.     @|.     ␣|.     ⏎|.
+    |▮      A|▮     @|▮     ␣|▮     ⏎|▮
                     @|A     ␣|A     ⏎|A
             A|@             ␣|@     ⏎|@
-            A␣|.    @␣|.            ⏎|␣
+            A␣|▮    @␣|▮            ⏎|␣
             A␣|A    @␣|A
             A␣|@    @␣|@
             A␣|⏎    @␣|⏎
@@ -81,10 +81,10 @@ we are discussing moves the cursor just after the sequence.
        Then, return position of where WSPs preceding it starts.
   - Illustration:
     ```text
-    .|   .|A     .|@    .|␣     .|⏎
+    ▮|   ▮|A     ▮|@    ▮|␣     ▮|⏎
                  A|@    A|␣     A|⏎
          @|A            @|␣     @|⏎
-        .|␣A    .|␣@            ␣|⏎
+        ▮|␣A    ▮|␣@            ␣|⏎
         A|␣A    A|␣@
         @|␣A    @|␣@
         ⏎|␣A    ⏎|␣@
@@ -112,21 +112,21 @@ by "wordSeparator" configuration.
 - `cursorWordEndRight`
 
   ```text
-  |.          ⏎|.
-  A|.         ⏎A|.
+  |▮          ⏎|▮
+  A|▮         ⏎A|▮
   A|@         ⏎A|@
   A|␣         ⏎A|␣
   A|⏎         ⏎A|⏎
-  @|.         ⏎@|.
+  @|▮         ⏎@|▮
   @|A         ⏎@|A
   @|␣         ⏎@|␣
   @|⏎         ⏎@|⏎
-  ␣|.         ⏎␣|.
-  ␣A|.        ⏎␣A|.
+  ␣|▮         ⏎␣|▮
+  ␣A|▮        ⏎␣A|▮
   ␣A|@        ⏎␣A|@
   ␣A|␣        ⏎␣A|␣
   ␣A|⏎        ⏎␣A|⏎
-  ␣@|.        ⏎␣@|.
+  ␣@|▮        ⏎␣@|▮
   ␣@|A        ⏎␣@|A
   ␣@|␣        ⏎␣@|␣
   ␣@|⏎        ⏎␣@|⏎
@@ -136,10 +136,10 @@ by "wordSeparator" configuration.
 
 - `cursorWordStartRight`
   ```text
-  |.      A|.     @|.             ⏎|.
+  |▮      A|▮     @|▮             ⏎|▮
                   @|A             ⏎|A
           A|@                     ⏎|@
-          A␣|.    @␣|.    ␣|.     ⏎␣|.
+          A␣|▮    @␣|▮    ␣|▮     ⏎␣|▮
           A␣|A    @␣|A    ␣|A     ⏎␣|A
           A␣|@    @␣|@    ␣|@     ⏎␣|@
           A␣|⏎    @␣|⏎    ␣|⏎     ⏎␣|⏎
