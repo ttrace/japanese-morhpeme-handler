@@ -21,7 +21,7 @@ Through out this document, I use these symbols:
 | `A`    | Alphabets and numbers      |
 | `@`    | One of the "wordSeparator" |
 | `␣`    | Whitespace                 |
-| `L`    | End of line                |
+| `⏎`    | End of line                |
 
 Additionally, location of the cursor after executing a command is expressed by
 vertical bar (`|`) symbol in a sequence of symbols. For example, `A|.` means
@@ -42,14 +42,14 @@ we are discussing moves the cursor just after the sequence.
        a non-WSP character sequence which starts with it.
   - Illustration:
     ```text
-    |.      A|.     @|.     ␣|.     L|.
-                    @|A     ␣A|.    L|A
+    |.      A|.     @|.     ␣|.     ⏎|.
+                    @|A     ␣A|.    ⏎|A
                             ␣A|@
                             ␣A|␣
-                            ␣A|L
-            A|@             ␣|@     L|@
-            A|␣     @|␣             L|␣
-            A|L     @|L     ␣|L     L|L
+                            ␣A|⏎
+            A|@             ␣|@     ⏎|@
+            A|␣     @|␣             ⏎|␣
+            A|⏎     @|⏎     ␣|⏎     ⏎|⏎
     ```
 
 - `cursorWordStartRight`
@@ -61,14 +61,14 @@ we are discussing moves the cursor just after the sequence.
        cursor. Then, return position of where WSPs following the sequence end.
   - Illustration:
     ```text
-    |.      A|.     @|.     ␣|.     L|.
-                    @|A     ␣|A     L|A
-            A|@             ␣|@     L|@
-            A␣|.    @␣|.            L|␣
+    |.      A|.     @|.     ␣|.     ⏎|.
+                    @|A     ␣|A     ⏎|A
+            A|@             ␣|@     ⏎|@
+            A␣|.    @␣|.            ⏎|␣
             A␣|A    @␣|A
             A␣|@    @␣|@
-            A␣|L    @␣|L
-            A|L     @|L     ␣|L     L|L
+            A␣|⏎    @␣|⏎
+            A|⏎     @|⏎     ␣|⏎     ⏎|⏎
     ```
 
 - `cursorWordEndLeft`
@@ -81,14 +81,14 @@ we are discussing moves the cursor just after the sequence.
        Then, return position of where WSPs preceding it starts.
   - Illustration:
     ```text
-    .|   .|A     .|@    .|␣     .|L
-                 A|@    A|␣     A|L
-         @|A            @|␣     @|L
-        .|␣A    .|␣@            ␣|L
+    .|   .|A     .|@    .|␣     .|⏎
+                 A|@    A|␣     A|⏎
+         @|A            @|␣     @|⏎
+        .|␣A    .|␣@            ␣|⏎
         A|␣A    A|␣@
         @|␣A    @|␣@
-        L|␣A    L|␣@
-        L|A     L|@    L|␣     L|L
+        ⏎|␣A    ⏎|␣@
+        ⏎|A     ⏎|@    ⏎|␣     ⏎|⏎
     ```
 
 There logic can be implemented as finite state automaton but I feel doing so is
@@ -112,38 +112,38 @@ by "wordSeparator" configuration.
 - `cursorWordEndRight`
 
   ```text
-  |.          L|.
-  A|.         LA|.
-  A|@         LA|@
-  A|␣         LA|␣
-  A|L         LA|L
-  @|.         L@|.
-  @|A         L@|A
-  @|␣         L@|␣
-  @|L         L@|L
-  ␣|.         L␣|.
-  ␣A|.        L␣A|.
-  ␣A|@        L␣A|@
-  ␣A|␣        L␣A|␣
-  ␣A|L        L␣A|L
-  ␣@|.        L␣@|.
-  ␣@|A        L␣@|A
-  ␣@|␣        L␣@|␣
-  ␣@|L        L␣@|L
-  ␣|L         L␣|L
-              L|L
+  |.          ⏎|.
+  A|.         ⏎A|.
+  A|@         ⏎A|@
+  A|␣         ⏎A|␣
+  A|⏎         ⏎A|⏎
+  @|.         ⏎@|.
+  @|A         ⏎@|A
+  @|␣         ⏎@|␣
+  @|⏎         ⏎@|⏎
+  ␣|.         ⏎␣|.
+  ␣A|.        ⏎␣A|.
+  ␣A|@        ⏎␣A|@
+  ␣A|␣        ⏎␣A|␣
+  ␣A|⏎        ⏎␣A|⏎
+  ␣@|.        ⏎␣@|.
+  ␣@|A        ⏎␣@|A
+  ␣@|␣        ⏎␣@|␣
+  ␣@|⏎        ⏎␣@|⏎
+  ␣|⏎         ⏎␣|⏎
+              ⏎|⏎
   ```
 
 - `cursorWordStartRight`
   ```text
-  |.      A|.     @|.             L|.
-                  @|A             L|A
-          A|@                     L|@
-          A␣|.    @␣|.    ␣|.     L␣|.
-          A␣|A    @␣|A    ␣|A     L␣|A
-          A␣|@    @␣|@    ␣|@     L␣|@
-          A␣|L    @␣|L    ␣|L     L␣|L
-          A|L     @|L             L|L
+  |.      A|.     @|.             ⏎|.
+                  @|A             ⏎|A
+          A|@                     ⏎|@
+          A␣|.    @␣|.    ␣|.     ⏎␣|.
+          A␣|A    @␣|A    ␣|A     ⏎␣|A
+          A␣|@    @␣|@    ␣|@     ⏎␣|@
+          A␣|⏎    @␣|⏎    ␣|⏎     ⏎␣|⏎
+          A|⏎     @|⏎             ⏎|⏎
   ```
 
 ### Word part version
