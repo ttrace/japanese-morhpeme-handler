@@ -15,7 +15,8 @@
         "Other"
     ],
     "extensionKind": [
-        "ui"
+        "ui",
+        "workspace"
     ],
     "license": "Zlib",
     "badges": [
