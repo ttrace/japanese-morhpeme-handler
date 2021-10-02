@@ -18,6 +18,12 @@
         "ui",
         "workspace"
     ],
+    "capabilities": {
+        "untrustedWorkspaces": {
+            "supported": true
+        },
+        "virtualWorkspaces": true
+    },
     "license": "Zlib",
     "badges": [
         {
