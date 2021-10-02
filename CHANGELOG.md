@@ -10,6 +10,8 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 <!-- markdownlint-disable MD022 MD024 MD032 MD033 -->
 
 ## [Unreleased]
+
+## [1.3.0] - 2021-10-02
 ### Feature
 - Untrusted workspaces support
 
