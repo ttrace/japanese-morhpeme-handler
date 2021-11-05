@@ -11,6 +11,10 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Feature
+
+- Now japanese-word-handler is a web extension so it can be used on `vscode.dev`
+
 ## [1.3.0] - 2021-10-02
 
 ### Feature
