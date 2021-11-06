@@ -142,7 +142,7 @@
         "compile-web": "webpack",
         "lint": "eslint src --ext ts",
         "package-web": "webpack --mode production --devtool hidden-source-map",
-        "pretest": "npm run compile-web",
+        "pretest": "npm run compile-web && npm run lint",
         "run-in-browser": "vscode-test-web --browserType=chromium --extensionDevelopmentPath=. .",
         "test": "vscode-test-web --browserType=chromium --extensionDevelopmentPath=. --extensionTestsPath=dist/web/test/suite/index.js",
         "vscode:prepublish": "npm run package-web",
