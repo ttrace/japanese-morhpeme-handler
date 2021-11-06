@@ -67,6 +67,7 @@
         "onCommand:extension.deleteWordEndRight",
         "onCommand:extension.deleteWordStartLeft"
     ],
+    "main": "./dist/web/extension.js",
     "browser": "./dist/web/extension.js",
     "contributes": {
         "keybindings": [
