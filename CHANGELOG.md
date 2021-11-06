@@ -11,6 +11,8 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [1.4.1] - 2021-11-06
+
 ### Fixed
 
 - Now japanese-word-handler works on on desktop environments too
