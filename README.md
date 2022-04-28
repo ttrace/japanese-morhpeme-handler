@@ -2,7 +2,10 @@
 
 # Japanese Morpheme Handler
 
-Morpheme based cursor movement in Japanese text for [VS Code](https://code.visualstudio.com).
+Japanese Morpheme based cursor movement extension for VS Code for [VS Code](https://code.visualstudio.com).
+
+This extension is forked from [Japanese Word Handler](https://github.com/sgryjp/japanese-word-handler) developed by [sgryip](https://github.com/sgryjp).
+
 
 
 ## How to activate the logic?
@@ -49,23 +52,24 @@ cursor to the end of it.
 
 ![Original cursor movement](images/japanese-word-handler-vanilla.gif)
 
-With this extension, on the other hand, the cursor will stop at each place
-where the Japanese character type (Hiragana, Katakana, ...) changes.
+With this extension, the cursor will stop at each word end.
 
 ![Improved cursor movement](images/japanese-word-handler.gif)
 
-## Known limitations
-
-As of VSCode 1.37.0, extension cannot override word related actions below:
-
-- Word selection on double click
-- Automatic highlight of a word at where the cursor is
-- 'Match Whole Word' option of text search
 
 ## Issue report
 
 Please visit the
-[project's GitHub page](https://github.com/sgryjp/japanese-word-handler)
+[project's GitHub page](https://github.com/ttrace/japanese-morhpeme-handler)
 and report it.
 
-**Enjoy!**
+## Copyright
+
+- Japanese Morpheme Handler is released under [zlib License](./LICENSE).
+- Japanese Morpheme Hander is based on [Japanese Word Handler](https://github.com/sgryjp/japanese-word-handler) developed by [sgryip](https://github.com/sgryjp) released under [zlib License](./LICENSE_ORIGINAL).  
+Almost codes are same with original, well developed software.  Taiyo Fujii only add implementation of morpheme cursor moving.
+- Japanese Morpheme Handler includes [Kuromoji.js](https://github.com/takuyaa/kuromoji.js) by [Takuya Asano](https://github.com/takuyaa).
+
+## Project Goal
+
+The goal of Japanese Morpheme Handler is issueing Pull-Request to Japanese Word Handler.

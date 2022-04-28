@@ -1,11 +1,22 @@
 # Change Log
 
+Change log of Japanese Morpheme Handler.
+THis extension is forked from [Japanese Word Handler](https://github.com/sgryjp/japanese-word-handler) developed by [Suguru Yamamoto](https://github.com/sgryjp) in 29th April 2022.
+
+## Forked 2022-4-29
+
+### Releasing 0.9.1
+
+- Morpheme Cursor Handling installed
+
+
+---
+Bellow are Japanese Word Handler history
+
 All notable changes to the "japanese-word-handler" extension will be
 documented in this file.
 
-The format is based on
-[Keep a Changelog](http://keepachangelog.com/en/1.0.0/) this project adheres
-to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
+
 
 <!-- markdownlint-disable MD022 MD024 MD032 MD033 -->
 
