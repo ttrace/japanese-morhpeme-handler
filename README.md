@@ -50,11 +50,7 @@ With the original logic, pressing <kbd>Ctrl</kbd>+<kbd>Right</kbd> while the
 cursor is at the beginning of a chunk of Japanese characters will move the
 cursor to the end of it.
 
-![Original cursor movement](images/japanese-word-handler-vanilla.gif)
-
 With this extension, the cursor will stop at each word end.
-
-![Improved cursor movement](images/japanese-word-handler.gif)
 
 
 ## Issue report
