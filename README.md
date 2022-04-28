@@ -1,15 +1,9 @@
 <!-- markdownlint-disable no-inline-html -->
 
-# Japanese Word Handler
+# Japanese Morpheme Handler
 
-[![Version (VS Marketplace)](https://vsmarketplacebadge.apphb.com/version-short/sgryjp.japanese-word-handler.svg)](https://marketplace.visualstudio.com/items?itemName=sgryjp.japanese-word-handler)
-![Rating (VS Marketplace)](https://vsmarketplacebadge.apphb.com/rating-star/sgryjp.japanese-word-handler.svg)
-![Installs (VS Marketplace)](https://vsmarketplacebadge.apphb.com/installs-short/sgryjp.japanese-word-handler.svg)
-&nbsp;
-[![Build status](https://ci.appveyor.com/api/projects/status/eqclfgbaefm5npt8/branch/master?svg=true)](https://ci.appveyor.com/project/sgryjp/japanese-word-handler/branch/master)
-[![zlib license](https://img.shields.io/badge/license-zlib-lightgray.svg?longCache=true&style=popout)](https://github.com/sgryjp/japanese-word-handler/blob/master/LICENSE)
+Morpheme based cursor movement in Japanese text for [VS Code](https://code.visualstudio.com).
 
-Better cursor movement in Japanese text for [VS Code](https://code.visualstudio.com).
 
 ## How to activate the logic?
 
@@ -29,18 +23,18 @@ The table below shows all available commands and their default keybindings:
 
 | Command                                          | Default Keybinding (except macOS)                 | Default keybinding (for macOS)                      |
 | ------------------------------------------------ | ------------------------------------------------- | --------------------------------------------------- |
-| `japaneseWordHandler.cursorWordEndLeft`          | [*1]                                              | [*1]                                                |
-| `japaneseWordHandler.cursorWordEndLeftSelect`    | [*1]                                              | [*1]                                                |
-| `japaneseWordHandler.cursorWordEndRight`         | <kbd>Ctrl</kbd>+<kbd>Right</kbd>                  | <kbd>Option</kbd>+<kbd>Right</kbd>                  |
-| `japaneseWordHandler.cursorWordEndRightSelect`   | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Right</kbd> | <kbd>Option</kbd>+<kbd>Shift</kbd>+<kbd>Right</kbd> |
-| `japaneseWordHandler.cursorWordStartLeft`        | <kbd>Ctrl</kbd>+<kbd>Left</kbd>                   | <kbd>Option</kbd>+<kbd>Left</kbd>                   |
-| `japaneseWordHandler.cursorWordStartLeftSelect`  | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Left</kbd>  | <kbd>Option</kbd>+<kbd>Shift</kbd>+<kbd>Left</kbd>  |
-| `japaneseWordHandler.cursorWordStartRight`       | [*1]                                              | [*1]                                                |
-| `japaneseWordHandler.cursorWordStartRightSelect` | [*1]                                              | [*1]                                                |
-| `japaneseWordHandler.deleteWordEndLeft`          | [*1]                                              | [*1]                                                |
-| `japaneseWordHandler.deleteWordEndRight`         | <kbd>Ctrl</kbd>+<kbd>Delete</kbd>                 | <kbd>Option</kbd>+<kbd>Delete</kbd>                 |
-| `japaneseWordHandler.deleteWordStartLeft`        | <kbd>Ctrl</kbd>+<kbd>Backspace</kbd>              | <kbd>Option</kbd>+<kbd>Backspace</kbd>              |
-| `japaneseWordHandler.deleteWordStartRight`       | [*1]                                              | [*1]                                                |
+| `morphemeWordHandler.cursorWordEndLeft`          | [*1]                                              | [*1]                                                |
+| `morphemeWordHandler.cursorWordEndLeftSelect`    | [*1]                                              | [*1]                                                |
+| `morphemeWordHandler.cursorWordEndRight`         | <kbd>Ctrl</kbd>+<kbd>Right</kbd>                  | <kbd>Option</kbd>+<kbd>Right</kbd>                  |
+| `morphemeWordHandler.cursorWordEndRightSelect`   | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Right</kbd> | <kbd>Option</kbd>+<kbd>Shift</kbd>+<kbd>Right</kbd> |
+| `morphemeWordHandler.cursorWordStartLeft`        | <kbd>Ctrl</kbd>+<kbd>Left</kbd>                   | <kbd>Option</kbd>+<kbd>Left</kbd>                   |
+| `morphemeWordHandler.cursorWordStartLeftSelect`  | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Left</kbd>  | <kbd>Option</kbd>+<kbd>Shift</kbd>+<kbd>Left</kbd>  |
+| `morphemeWordHandler.cursorWordStartRight`       | [*1]                                              | [*1]                                                |
+| `morphemeWordHandler.cursorWordStartRightSelect` | [*1]                                              | [*1]                                                |
+| `morphemeWordHandler.deleteWordEndLeft`          | [*1]                                              | [*1]                                                |
+| `morphemeWordHandler.deleteWordEndRight`         | <kbd>Ctrl</kbd>+<kbd>Delete</kbd>                 | <kbd>Option</kbd>+<kbd>Delete</kbd>                 |
+| `morphemeWordHandler.deleteWordStartLeft`        | <kbd>Ctrl</kbd>+<kbd>Backspace</kbd>              | <kbd>Option</kbd>+<kbd>Backspace</kbd>              |
+| `morphemeWordHandler.deleteWordStartRight`       | [*1]                                              | [*1]                                                |
 
 - [*1] <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>9</kbd> is assigned
   for those commands so that they will appear in the Keyboard Shortcuts
