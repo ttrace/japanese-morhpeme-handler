@@ -139,6 +139,10 @@
             }
         ]
     },
+    "dependencies": {
+        "@types/kuromoji": "^0.1.1",
+        "kuromoji": "^0.1.2"
+    },
     "scripts": {
         "compile-web": "webpack",
         "lint": "eslint src --ext ts",

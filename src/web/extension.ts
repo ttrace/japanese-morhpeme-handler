@@ -1,7 +1,10 @@
-'use strict';
+
 
 import * as vscode from 'vscode';
 import { Position, Range, Selection, TextDocument, TextEditor } from 'vscode';
+import * as kuromoji from 'kuromoji';
+
+let kuromojiBuilder: any;
 
 //-----------------------------------------------------------------------------
 export function activate(context: vscode.ExtensionContext) {
@@ -39,6 +42,11 @@ export function activate(context: vscode.ExtensionContext) {
     registerCommand('extension.cursorWordStartLeftSelect', cursorWordStartLeftSelect);
     registerCommand('extension.deleteWordRight', deleteWordEndRight);
     registerCommand('extension.deleteWordLeft', deleteWordStartLeft);
+
+    // Initialize Kuromoji library
+    kuromojiBuilder = kuromoji.builder({
+        dicPath: context.extensionPath + '/node_modules/kuromoji/dict'
+    });
 }
 
 //-----------------------------------------------------------------------------
@@ -336,6 +344,16 @@ function findPreviousWordEnd(
  *                       (mostly used in English-like language context.)
  */
 function makeClassifier(wordSeparators: string) {
+
+    kuromojiBuilder.build((err: any, tokenizer: any) => {
+        // 辞書がなかったりするとここでエラーになります(´・ω・｀)
+        if (err) {
+            console.dir('Kuromoji initialize error:' + err.message);
+            throw err;
+        };
+    });
+
+    
     return function classifyChar(
         doc: TextDocument,
         line: number,
