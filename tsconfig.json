@@ -1,12 +1,10 @@
 {
     "compilerOptions": {
         "module": "commonjs",
-        "target": "es6",
-		"outDir": "dist",
-        "lib": [
-			"es6", "WebWorker"
-        ],
-        "sourceMap": true,
+		"target": "es2019",
+		"lib": ["ES2019"],
+		"outDir": "out",
+		"sourceMap": true,
         "rootDir": "src",
 		"strict": true, /* enable all strict type-checking options */
         /* Additional Checks */
@@ -17,6 +15,6 @@
     },
     "exclude": [
         "node_modules",
-		".vscode-test-web"
-    ]
+		".vscode-test"
+	]
 }

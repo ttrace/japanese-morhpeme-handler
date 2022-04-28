@@ -1,4 +1,4 @@
-
+'use strict';
 
 import * as vscode from 'vscode';
 import { Position, Range, Selection, TextDocument, TextEditor } from 'vscode';
@@ -24,18 +24,18 @@ export function activate(context: vscode.ExtensionContext) {
     };
 
     // Register commands
-    registerCommand('japaneseWordHandler.cursorWordEndLeft', cursorWordEndLeft);
-    registerCommand('japaneseWordHandler.cursorWordEndLeftSelect', cursorWordEndLeftSelect);
-    registerCommand('japaneseWordHandler.cursorWordEndRight', cursorWordEndRight);
-    registerCommand('japaneseWordHandler.cursorWordEndRightSelect', cursorWordEndRightSelect);
-    registerCommand('japaneseWordHandler.cursorWordStartLeft', cursorWordStartLeft);
-    registerCommand('japaneseWordHandler.cursorWordStartLeftSelect', cursorWordStartLeftSelect);
-    registerCommand('japaneseWordHandler.cursorWordStartRight', cursorWordStartRight);
-    registerCommand('japaneseWordHandler.cursorWordStartRightSelect', cursorWordStartRightSelect);
-    registerCommand('japaneseWordHandler.deleteWordEndLeft', deleteWordEndLeft);
-    registerCommand('japaneseWordHandler.deleteWordEndRight', deleteWordEndRight);
-    registerCommand('japaneseWordHandler.deleteWordStartLeft', deleteWordStartLeft);
-    registerCommand('japaneseWordHandler.deleteWordStartRight', deleteWordStartRight);
+    registerCommand('morphemeWordHandler.cursorWordEndLeft', cursorWordEndLeft);
+    registerCommand('morphemeWordHandler.cursorWordEndLeftSelect', cursorWordEndLeftSelect);
+    registerCommand('morphemeWordHandler.cursorWordEndRight', cursorWordEndRight);
+    registerCommand('morphemeWordHandler.cursorWordEndRightSelect', cursorWordEndRightSelect);
+    registerCommand('morphemeWordHandler.cursorWordStartLeft', cursorWordStartLeft);
+    registerCommand('morphemeWordHandler.cursorWordStartLeftSelect', cursorWordStartLeftSelect);
+    registerCommand('morphemeWordHandler.cursorWordStartRight', cursorWordStartRight);
+    registerCommand('morphemeWordHandler.cursorWordStartRightSelect', cursorWordStartRightSelect);
+    registerCommand('morphemeWordHandler.deleteWordEndLeft', deleteWordEndLeft);
+    registerCommand('morphemeWordHandler.deleteWordEndRight', deleteWordEndRight);
+    registerCommand('morphemeWordHandler.deleteWordStartLeft', deleteWordStartLeft);
+    registerCommand('morphemeWordHandler.deleteWordStartRight', deleteWordStartRight);
 
     // Register legacy commands for compatibility
     registerCommand('extension.cursorWordEndRight', cursorWordEndRight);
