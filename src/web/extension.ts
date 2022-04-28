@@ -1,4 +1,4 @@
-
+'use strict';
 
 import * as vscode from 'vscode';
 import { Position, Range, Selection, TextDocument, TextEditor } from 'vscode';
