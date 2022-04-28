@@ -1,8 +1,7 @@
 .vscode/**
 .vscode-test-web/**
 src/**
-out/**
-node_modules/**
+!node_modules/kuromoji/**
 .gitignore
 vsc-extension-quickstart.md
 webpack.config.js

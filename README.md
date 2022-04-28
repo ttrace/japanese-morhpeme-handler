@@ -1,15 +1,12 @@
 <!-- markdownlint-disable no-inline-html -->
 
-# Japanese Word Handler
+# Japanese Morpheme Handler
 
-[![Version (VS Marketplace)](https://vsmarketplacebadge.apphb.com/version-short/sgryjp.japanese-word-handler.svg)](https://marketplace.visualstudio.com/items?itemName=sgryjp.japanese-word-handler)
-![Rating (VS Marketplace)](https://vsmarketplacebadge.apphb.com/rating-star/sgryjp.japanese-word-handler.svg)
-![Installs (VS Marketplace)](https://vsmarketplacebadge.apphb.com/installs-short/sgryjp.japanese-word-handler.svg)
-&nbsp;
-[![Build status](https://ci.appveyor.com/api/projects/status/eqclfgbaefm5npt8/branch/master?svg=true)](https://ci.appveyor.com/project/sgryjp/japanese-word-handler/branch/master)
-[![zlib license](https://img.shields.io/badge/license-zlib-lightgray.svg?longCache=true&style=popout)](https://github.com/sgryjp/japanese-word-handler/blob/master/LICENSE)
+Japanese Morpheme based cursor movement extension for VS Code for [VS Code](https://code.visualstudio.com).
 
-Better cursor movement in Japanese text for [VS Code](https://code.visualstudio.com).
+This extension is forked from [Japanese Word Handler](https://github.com/sgryjp/japanese-word-handler) developed by [sgryip](https://github.com/sgryjp).
+
+
 
 ## How to activate the logic?
 
@@ -29,18 +26,18 @@ The table below shows all available commands and their default keybindings:
 
 | Command                                          | Default Keybinding (except macOS)                 | Default keybinding (for macOS)                      |
 | ------------------------------------------------ | ------------------------------------------------- | --------------------------------------------------- |
-| `japaneseWordHandler.cursorWordEndLeft`          | [*1]                                              | [*1]                                                |
-| `japaneseWordHandler.cursorWordEndLeftSelect`    | [*1]                                              | [*1]                                                |
-| `japaneseWordHandler.cursorWordEndRight`         | <kbd>Ctrl</kbd>+<kbd>Right</kbd>                  | <kbd>Option</kbd>+<kbd>Right</kbd>                  |
-| `japaneseWordHandler.cursorWordEndRightSelect`   | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Right</kbd> | <kbd>Option</kbd>+<kbd>Shift</kbd>+<kbd>Right</kbd> |
-| `japaneseWordHandler.cursorWordStartLeft`        | <kbd>Ctrl</kbd>+<kbd>Left</kbd>                   | <kbd>Option</kbd>+<kbd>Left</kbd>                   |
-| `japaneseWordHandler.cursorWordStartLeftSelect`  | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Left</kbd>  | <kbd>Option</kbd>+<kbd>Shift</kbd>+<kbd>Left</kbd>  |
-| `japaneseWordHandler.cursorWordStartRight`       | [*1]                                              | [*1]                                                |
-| `japaneseWordHandler.cursorWordStartRightSelect` | [*1]                                              | [*1]                                                |
-| `japaneseWordHandler.deleteWordEndLeft`          | [*1]                                              | [*1]                                                |
-| `japaneseWordHandler.deleteWordEndRight`         | <kbd>Ctrl</kbd>+<kbd>Delete</kbd>                 | <kbd>Option</kbd>+<kbd>Delete</kbd>                 |
-| `japaneseWordHandler.deleteWordStartLeft`        | <kbd>Ctrl</kbd>+<kbd>Backspace</kbd>              | <kbd>Option</kbd>+<kbd>Backspace</kbd>              |
-| `japaneseWordHandler.deleteWordStartRight`       | [*1]                                              | [*1]                                                |
+| `morphemeWordHandler.cursorWordEndLeft`          | [*1]                                              | [*1]                                                |
+| `morphemeWordHandler.cursorWordEndLeftSelect`    | [*1]                                              | [*1]                                                |
+| `morphemeWordHandler.cursorWordEndRight`         | <kbd>Ctrl</kbd>+<kbd>Right</kbd>                  | <kbd>Option</kbd>+<kbd>Right</kbd>                  |
+| `morphemeWordHandler.cursorWordEndRightSelect`   | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Right</kbd> | <kbd>Option</kbd>+<kbd>Shift</kbd>+<kbd>Right</kbd> |
+| `morphemeWordHandler.cursorWordStartLeft`        | <kbd>Ctrl</kbd>+<kbd>Left</kbd>                   | <kbd>Option</kbd>+<kbd>Left</kbd>                   |
+| `morphemeWordHandler.cursorWordStartLeftSelect`  | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Left</kbd>  | <kbd>Option</kbd>+<kbd>Shift</kbd>+<kbd>Left</kbd>  |
+| `morphemeWordHandler.cursorWordStartRight`       | [*1]                                              | [*1]                                                |
+| `morphemeWordHandler.cursorWordStartRightSelect` | [*1]                                              | [*1]                                                |
+| `morphemeWordHandler.deleteWordEndLeft`          | [*1]                                              | [*1]                                                |
+| `morphemeWordHandler.deleteWordEndRight`         | <kbd>Ctrl</kbd>+<kbd>Delete</kbd>                 | <kbd>Option</kbd>+<kbd>Delete</kbd>                 |
+| `morphemeWordHandler.deleteWordStartLeft`        | <kbd>Ctrl</kbd>+<kbd>Backspace</kbd>              | <kbd>Option</kbd>+<kbd>Backspace</kbd>              |
+| `morphemeWordHandler.deleteWordStartRight`       | [*1]                                              | [*1]                                                |
 
 - [*1] <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>9</kbd> is assigned
   for those commands so that they will appear in the Keyboard Shortcuts
@@ -53,25 +50,22 @@ With the original logic, pressing <kbd>Ctrl</kbd>+<kbd>Right</kbd> while the
 cursor is at the beginning of a chunk of Japanese characters will move the
 cursor to the end of it.
 
-![Original cursor movement](images/japanese-word-handler-vanilla.gif)
+With this extension, the cursor will stop at each word end.
 
-With this extension, on the other hand, the cursor will stop at each place
-where the Japanese character type (Hiragana, Katakana, ...) changes.
-
-![Improved cursor movement](images/japanese-word-handler.gif)
-
-## Known limitations
-
-As of VSCode 1.37.0, extension cannot override word related actions below:
-
-- Word selection on double click
-- Automatic highlight of a word at where the cursor is
-- 'Match Whole Word' option of text search
 
 ## Issue report
 
 Please visit the
-[project's GitHub page](https://github.com/sgryjp/japanese-word-handler)
+[project's GitHub page](https://github.com/ttrace/japanese-morhpeme-handler)
 and report it.
 
-**Enjoy!**
+## Copyright
+
+- Japanese Morpheme Handler is released under [zlib License](./LICENSE).
+- Japanese Morpheme Hander is based on [Japanese Word Handler](https://github.com/sgryjp/japanese-word-handler) developed by [sgryip](https://github.com/sgryjp) released under [zlib License](./LICENSE_ORIGINAL).  
+Almost codes are same with original, well developed software.  Taiyo Fujii only add implementation of morpheme cursor moving.
+- Japanese Morpheme Handler includes [Kuromoji.js](https://github.com/takuyaa/kuromoji.js) by [Takuya Asano](https://github.com/takuyaa).
+
+## Project Goal
+
+The goal of Japanese Morpheme Handler is issueing Pull-Request to Japanese Word Handler.

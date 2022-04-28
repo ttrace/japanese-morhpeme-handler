@@ -2,6 +2,11 @@
 
 import * as vscode from 'vscode';
 import { Position, Range, Selection, TextDocument, TextEditor } from 'vscode';
+import * as kuromoji from 'kuromoji';
+
+let kuromojiBuilder: any;
+let editingLineCache: number = 0;
+let editingLinesTokenCache: any[] = [];
 
 //-----------------------------------------------------------------------------
 export function activate(context: vscode.ExtensionContext) {
@@ -19,18 +24,18 @@ export function activate(context: vscode.ExtensionContext) {
     };
 
     // Register commands
-    registerCommand('japaneseWordHandler.cursorWordEndLeft', cursorWordEndLeft);
-    registerCommand('japaneseWordHandler.cursorWordEndLeftSelect', cursorWordEndLeftSelect);
-    registerCommand('japaneseWordHandler.cursorWordEndRight', cursorWordEndRight);
-    registerCommand('japaneseWordHandler.cursorWordEndRightSelect', cursorWordEndRightSelect);
-    registerCommand('japaneseWordHandler.cursorWordStartLeft', cursorWordStartLeft);
-    registerCommand('japaneseWordHandler.cursorWordStartLeftSelect', cursorWordStartLeftSelect);
-    registerCommand('japaneseWordHandler.cursorWordStartRight', cursorWordStartRight);
-    registerCommand('japaneseWordHandler.cursorWordStartRightSelect', cursorWordStartRightSelect);
-    registerCommand('japaneseWordHandler.deleteWordEndLeft', deleteWordEndLeft);
-    registerCommand('japaneseWordHandler.deleteWordEndRight', deleteWordEndRight);
-    registerCommand('japaneseWordHandler.deleteWordStartLeft', deleteWordStartLeft);
-    registerCommand('japaneseWordHandler.deleteWordStartRight', deleteWordStartRight);
+    registerCommand('morphemeWordHandler.cursorWordEndLeft', cursorWordEndLeft);
+    registerCommand('morphemeWordHandler.cursorWordEndLeftSelect', cursorWordEndLeftSelect);
+    registerCommand('morphemeWordHandler.cursorWordEndRight', cursorWordEndRight);
+    registerCommand('morphemeWordHandler.cursorWordEndRightSelect', cursorWordEndRightSelect);
+    registerCommand('morphemeWordHandler.cursorWordStartLeft', cursorWordStartLeft);
+    registerCommand('morphemeWordHandler.cursorWordStartLeftSelect', cursorWordStartLeftSelect);
+    registerCommand('morphemeWordHandler.cursorWordStartRight', cursorWordStartRight);
+    registerCommand('morphemeWordHandler.cursorWordStartRightSelect', cursorWordStartRightSelect);
+    registerCommand('morphemeWordHandler.deleteWordEndLeft', deleteWordEndLeft);
+    registerCommand('morphemeWordHandler.deleteWordEndRight', deleteWordEndRight);
+    registerCommand('morphemeWordHandler.deleteWordStartLeft', deleteWordStartLeft);
+    registerCommand('morphemeWordHandler.deleteWordStartRight', deleteWordStartRight);
 
     // Register legacy commands for compatibility
     registerCommand('extension.cursorWordEndRight', cursorWordEndRight);
@@ -39,6 +44,11 @@ export function activate(context: vscode.ExtensionContext) {
     registerCommand('extension.cursorWordStartLeftSelect', cursorWordStartLeftSelect);
     registerCommand('extension.deleteWordRight', deleteWordEndRight);
     registerCommand('extension.deleteWordLeft', deleteWordStartLeft);
+
+    // Initialize Kuromoji library
+    kuromojiBuilder = kuromoji.builder({
+        dicPath: context.extensionPath + '/node_modules/kuromoji/dict'
+    });
 }
 
 //-----------------------------------------------------------------------------
@@ -177,14 +187,28 @@ function findNextWordStart(
             : caretPos;                 // end-of-document
     }
 
-    // Seek until character type changes, unless already reached EOL/EOD
+    //making cache
+    if (caretPos.line !== editingLineCache) {
+        make_morpheme(doc.lineAt(caretPos.line).text);
+        editingLineCache = caretPos.line;
+        editingLinesTokenCache = [];
+    }
+
     let pos = caretPos;
-    klass = classify(doc, pos.line, pos.character);
-    if (classify(doc, pos.line, pos.character) !== CharClass.Invalid) {
-        do {
-            pos = new Position(pos.line, pos.character + 1);
+    // Seek until character type changes, unless already reached EOL/EOD
+    // Seek until character type changes, unless already reached EOL/EOD
+    if (editingLinesTokenCache.length === 0) {
+        pos = new Position(caretPos.line, caretPos.character + 1);
+    } else {
+        let target = 0;
+        let i = 0;
+        while (caretPos.character >= target) {
+            i++;
+            target = editingLinesTokenCache[i];
         }
-        while (klass === classify(doc, pos.line, pos.character));
+        target = editingLinesTokenCache[i + 1] - 1;
+        console.log('Pos:' + target);
+        pos = new Position(caretPos.line, target);
     }
 
     // Skip a series of whitespaces
@@ -221,6 +245,13 @@ function findNextWordEnd(
             : caretPos;                 // end-of-document
     }
 
+    //making cache
+    if (caretPos.line !== editingLineCache) {
+        make_morpheme(doc.lineAt(caretPos.line).text);
+        editingLineCache = caretPos.line;
+        editingLinesTokenCache = [];
+    }
+
     // Skip a series of whitespaces
     let pos = caretPos;
     if (klass === CharClass.Whitespace) {
@@ -231,12 +262,18 @@ function findNextWordEnd(
     }
 
     // Seek until character type changes, unless already reached EOL/EOD
-    klass = classify(doc, pos.line, pos.character);
-    if (classify(doc, pos.line, pos.character) !== CharClass.Invalid) {
-        do {
-            pos = new Position(pos.line, pos.character + 1);
+    if (editingLinesTokenCache.length === 0) {
+        pos = new Position(caretPos.line, caretPos.character + 1);
+    } else {
+        let target = 0;
+        let i = 0;
+        while (caretPos.character >= target) {
+            i++;
+            target = editingLinesTokenCache[i];
         }
-        while (klass === classify(doc, pos.line, pos.character));
+        target = editingLinesTokenCache[i + 1] - 1;
+        console.log('Pos:' + target);
+        pos = new Position(caretPos.line, target);
     }
 
     return pos;
@@ -259,12 +296,30 @@ function findPreviousWordStart(
 
     const classify = makeClassifier(wordSeparators);
 
+    //making cache
+    if (caretPos.line !== editingLineCache) {
+        make_morpheme(doc.lineAt(caretPos.line).text);
+        editingLineCache = caretPos.line;
+        editingLinesTokenCache = [];
+    }
+
+    let pos = caretPos;
+
+    if (caretPos.character === 0) {
+        if (caretPos.line !== 0) {
+            let lastCharacter = doc.lineAt(caretPos.line - 1).range.end.character;
+            pos = new Position(pos.line - 1, lastCharacter);
+            return pos;
+        }
+        return pos;
+    }
+
     // Firstly skip whitespaces, excluding EOL codes.
     function prevCharIsWhitespace() {
         let prevPos = doc.positionAt(doc.offsetAt(pos) - 1);
         return (classify(doc, prevPos.line, prevPos.character) === CharClass.Whitespace);
     }
-    let pos = caretPos;
+
     while (prevCharIsWhitespace()) {
         // Intentionally avoiding to use doc.positionAt(doc.offsetAt())
         // so that the seek stops at the EOL.
@@ -275,16 +330,18 @@ function findPreviousWordStart(
     }
 
     // Then, seek until the character type changes.
-    pos = doc.positionAt(doc.offsetAt(pos) - 1);
-    const initKlass = classify(doc, pos.line, pos.character);
-    let prevPos = doc.positionAt(doc.offsetAt(pos) - 1);
-    while (prevPos.isBefore(pos)) {
-        if (initKlass !== classify(doc, prevPos.line, prevPos.character)) {
-            break;
+    if (editingLinesTokenCache.length === 0) {
+        pos = new Position(caretPos.line, caretPos.character - 1);
+    } else {
+        let target = 0;
+        let i = 0;
+        while (caretPos.character >= target) {
+            target = editingLinesTokenCache[i + 1];
+            i++;
         }
-
-        pos = prevPos;
-        prevPos = doc.positionAt(doc.offsetAt(pos) - 1);
+        target = editingLinesTokenCache[i - 1] - 1;
+        console.log('Pos:' + target);
+        pos = new Position(caretPos.line, target);
     }
 
     return pos;
@@ -298,7 +355,19 @@ function findPreviousWordEnd(
     caretPos: Position,
     wordSeparators: string
 ) {
-    const classify = makeClassifier(wordSeparators);
+    //const classify = makeClassifier(wordSeparators);
+    if (caretPos.line !== editingLineCache && editingLinesTokenCache !== []) {
+        make_morpheme(doc.lineAt(caretPos.line).text);
+        editingLineCache = caretPos.line;
+        editingLinesTokenCache = [];
+    }
+
+    //making cache
+    if (caretPos.line !== editingLineCache) {
+        make_morpheme(doc.lineAt(caretPos.line).text);
+        editingLineCache = caretPos.line;
+        editingLinesTokenCache = [];
+    }
 
     let pos = caretPos;
     if (pos.character === 0) {
@@ -310,21 +379,28 @@ function findPreviousWordEnd(
     }
     //assert 0 < pos.character
 
-    // Seek until character type changes, unless already reached EOL/EOD
-    let klass: CharClass;
-    let initKlass = classify(doc, pos.line, pos.character - 1);
-    do {
-        pos = new Position(pos.line, pos.character - 1);
-        klass = classify(doc, pos.line, pos.character - 1);
-    }
-    while (klass === initKlass);
-
-    if (klass === CharClass.Whitespace) {
-        do {
-            pos = new Position(pos.line, pos.character - 1);
-            klass = classify(doc, pos.line, pos.character - 1);
+    if (caretPos.character === 0) {
+        if (caretPos.line !== 0) {
+            let lastCharacter = doc.lineAt(caretPos.line - 1).range.end.character;
+            pos = new Position(pos.line - 1, lastCharacter);
+            return pos;
         }
-        while (klass === CharClass.Whitespace);
+        return pos;
+    }
+
+    // Seek until character type changes, unless already reached EOL/EOD
+    if (editingLinesTokenCache.length === 0) {
+        pos = new Position(caretPos.line, caretPos.character - 1);
+    } else {
+        let target = 0;
+        let i = 0;
+        while (caretPos.character >= target) {
+            target = editingLinesTokenCache[i + 1];
+            i++;
+        }
+        target = editingLinesTokenCache[i - 1] - 1;
+        console.log('Pos:' + target);
+        pos = new Position(caretPos.line, target);
     }
 
     return pos;
@@ -336,6 +412,7 @@ function findPreviousWordEnd(
  *                       (mostly used in English-like language context.)
  */
 function makeClassifier(wordSeparators: string) {
+
     return function classifyChar(
         doc: TextDocument,
         line: number,
@@ -406,4 +483,21 @@ function makeClassifier(wordSeparators: string) {
 
         return CharClass.Other;
     };
+}
+
+function make_morpheme(text: string) {
+    kuromojiBuilder.build((err: any, tokenizer: any) => {
+        // 辞書がなかったりするとここでエラーになります(´・ω・｀)
+        if (err) {
+            console.dir('Kuromoji initialize error:' + err.message);
+            throw err;
+        };
+        const kuromojiToken = tokenizer.tokenize(text);
+        //console.log(kuromojiToken);
+        console.log(text);
+        editingLinesTokenCache = [];
+        kuromojiToken.forEach((token: any) => {
+            editingLinesTokenCache.push(token.word_position);
+        });
+    });
 }

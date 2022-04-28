@@ -1,34 +1,27 @@
-// A launch configuration that compiles the extension and then opens it inside a new window
-// Use IntelliSense to learn about possible attributes.
-// Hover to view descriptions of existing attributes.
-// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
 {
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Run Web Extension ",
-            "type": "pwa-extensionHost",
-            "debugWebWorkerHost": true,
-            "request": "launch",
-            "args": [
-                "--extensionDevelopmentPath=${workspaceFolder}",
-                "--extensionDevelopmentKind=web"
-            ],
-            "outFiles": ["${workspaceFolder}/dist/web/**/*.js"],
-            "preLaunchTask": "npm: watch-web"
-        },
-        {
-            "name": "Extension Tests",
+            "name": "Extension",
             "type": "extensionHost",
-            "debugWebWorkerHost": true,
             "request": "launch",
+            "runtimeExecutable": "${execPath}",
             "args": [
-                "--extensionDevelopmentPath=${workspaceFolder}",
-                "--extensionDevelopmentKind=web",
-                "--extensionTestsPath=${workspaceFolder}/dist/web/test/suite/index"
+                "--extensionDevelopmentPath=${workspaceFolder}"
             ],
-            "outFiles": ["${workspaceFolder}/dist/web/**/*.js"],
-            "preLaunchTask": "npm: watch-web"
-        }
+            "outFiles": ["${workspaceFolder}/out/test/**/*.js"]
+        },
+		{
+			"name": "Run Extension Tests",
+			"type": "extensionHost",
+			"request": "launch",
+			"runtimeExecutable": "${execPath}",
+			"args": [
+				"--extensionDevelopmentPath=${workspaceFolder}",
+				"--extensionTestsPath=${workspaceFolder}/out/test/suite/index"
+			],
+			"outFiles": ["${workspaceFolder}/out/test/**/*.js"],
+			"preLaunchTask": "npm: watch"
+		}
     ]
 }

@@ -1,11 +1,22 @@
 # Change Log
 
+Change log of Japanese Morpheme Handler.
+THis extension is forked from [Japanese Word Handler](https://github.com/sgryjp/japanese-word-handler) developed by [Suguru Yamamoto](https://github.com/sgryjp) in 29th April 2022.
+
+## Forked 2022-4-29
+
+### Releasing 0.9.1
+
+- Morpheme Cursor Handling installed
+
+
+---
+Bellow are Japanese Word Handler history
+
 All notable changes to the "japanese-word-handler" extension will be
 documented in this file.
 
-The format is based on
-[Keep a Changelog](http://keepachangelog.com/en/1.0.0/) this project adheres
-to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
+
 
 <!-- markdownlint-disable MD022 MD024 MD032 MD033 -->
 
@@ -53,12 +64,12 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ### Added
 
-- New command `japaneseWordHandler.cursorWordEndLeft`
-- New command `japaneseWordHandler.cursorWordEndLeftSelect`
-- New command `japaneseWordHandler.cursorWordStartRight`
-- New command `japaneseWordHandler.cursorWordStartRightSelect`
-- New command `japaneseWordHandler.deleteWordEndLeft`
-- New command `japaneseWordHandler.deleteWordStartRight`
+- New command `morphemeWordHandler.cursorWordEndLeft`
+- New command `morphemeWordHandler.cursorWordEndLeftSelect`
+- New command `morphemeWordHandler.cursorWordStartRight`
+- New command `morphemeWordHandler.cursorWordStartRightSelect`
+- New command `morphemeWordHandler.deleteWordEndLeft`
+- New command `morphemeWordHandler.deleteWordStartRight`
 
 ### Change
 
@@ -66,12 +77,12 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
   | Old Command Names                       | New Command Names                               |
   | --------------------------------------- | ----------------------------------------------- |
-  | `extension.cursorNextWordEndJa`         | `japaneseWordHandler.cursorWordEndRight`        |
-  | `extension.cursorNextWordEndSelectJa`   | `japaneseWordHandler.cursorWordEndRightSelect`  |
-  | `extension.cursorPrevWordStartJa`       | `japaneseWordHandler.cursorWordStartLeft`       |
-  | `extension.cursorPrevWordStartSelectJa` | `japaneseWordHandler.cursorWordStartLeftSelect` |
-  | `extension.deleteWordRight`             | `japaneseWordHandler.deleteWordEndRight`        |
-  | `extension.deleteWordLeft`              | `japaneseWordHandler.deleteWordStartLeft`       |
+  | `extension.cursorNextWordEndJa`         | `morphemeWordHandler.cursorWordEndRight`        |
+  | `extension.cursorNextWordEndSelectJa`   | `morphemeWordHandler.cursorWordEndRightSelect`  |
+  | `extension.cursorPrevWordStartJa`       | `morphemeWordHandler.cursorWordStartLeft`       |
+  | `extension.cursorPrevWordStartSelectJa` | `morphemeWordHandler.cursorWordStartLeftSelect` |
+  | `extension.deleteWordRight`             | `morphemeWordHandler.deleteWordEndRight`        |
+  | `extension.deleteWordLeft`              | `morphemeWordHandler.deleteWordStartLeft`       |
 
 ## [1.1.1] - 2018-10-17
 
