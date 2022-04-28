@@ -139,6 +139,10 @@
             }
         ]
     },
+    "dependencies": {
+        "@types/kuromoji": "^0.1.1",
+        "kuromoji": "^0.1.2"
+    },
     "scripts": {
         "compile-web": "webpack",
         "lint": "eslint src --ext ts",
@@ -147,7 +151,8 @@
         "run-in-browser": "vscode-test-web --browserType=chromium --extensionDevelopmentPath=. .",
         "test": "vscode-test-web --browserType=chromium --extensionDevelopmentPath=. --extensionTestsPath=dist/web/test/suite/index.js",
         "vscode:prepublish": "npm run package-web",
-        "watch-web": "webpack --watch"
+        "watch-web": "webpack --watch",
+        "compile": "tsc -p ./"
     },
     "devDependencies": {
         "@types/mocha": "^9.0.0",
