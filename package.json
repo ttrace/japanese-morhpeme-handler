@@ -1,7 +1,7 @@
 {
     "name": "japanese-morpheme-handler",
-    "displayName": "Japanese Word Handler",
-    "description": "Better Japanese word handling on cursor movement",
+    "displayName": "Japanese Morphene Handler",
+    "description": "Cursor moving on morphene space in Japanese",
     "version": "0.9.1",
     "publisher": "Taiyo Fujii",
     "repository": {
@@ -22,30 +22,11 @@
         "untrustedWorkspaces": {
             "supported": true
         },
-        "virtualWorkspaces": true
+        "virtualWorkspaces": false
     },
     "license": "Zlib",
     "badges": [
-        {
-            "url": "https://vsmarketplacebadge.apphb.com/rating-short/sgryjp.japanese-word-handler.svg",
-            "href": "https://marketplace.visualstudio.com/items?itemName=sgryjp.japanese-word-handler",
-            "description": "Rating (VS Marketplace)"
-        },
-        {
-            "url": "https://vsmarketplacebadge.apphb.com/installs-short/sgryjp.japanese-word-handler.svg",
-            "href": "https://marketplace.visualstudio.com/items?itemName=sgryjp.japanese-word-handler",
-            "description": "Number of installations (VS Marketplace)"
-        },
-        {
-            "url": "https://ci.appveyor.com/api/projects/status/eqclfgbaefm5npt8/branch/master?svg=true",
-            "href": "https://ci.appveyor.com/project/sgryjp/japanese-word-handler/branch/master",
-            "description": "Build status"
-        },
-        {
-            "url": "https://img.shields.io/badge/license-zlib-lightgrey.svg?longCache=true&style=popout",
-            "href": "https://github.com/sgryjp/japanese-word-handler/blob/master/LICENSE",
-            "description": "zlib License"
-        }
+        
     ],
     "activationEvents": [
         "onCommand:morphemeWordHandler.cursorWordEndLeft",
@@ -144,15 +125,13 @@
         "kuromoji": "^0.1.2"
     },
     "scripts": {
-        "compile-web": "webpack",
-        "lint": "eslint src --ext ts",
-        "package-web": "webpack --mode production --devtool hidden-source-map",
-        "pretest": "npm run compile-web && npm run lint",
-        "run-in-browser": "vscode-test-web --browserType=chromium --extensionDevelopmentPath=. .",
-        "test": "vscode-test-web --browserType=chromium --extensionDevelopmentPath=. --extensionTestsPath=dist/web/test/suite/index.js",
-        "vscode:prepublish": "npm run package-web",
-        "watch-web": "webpack --watch",
-        "compile": "tsc -p ./"
+        "vscode:prepublish": "npm run compile",
+        "lint": "eslint . --ext ts",
+        "compile": "tsc -p ./",
+        "pretest": "npm run compile",
+        "vscode:pretest": "npm run compile",
+        "watch": "tsc -watch -p ./",
+        "test": "node ./out/test/runTest.js"
     },
     "devDependencies": {
         "@types/mocha": "^9.0.0",
