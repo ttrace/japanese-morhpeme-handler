@@ -22,8 +22,10 @@ suite("japanese-word-handler", () => {
     };
 
     suiteSetup(async () => {
-        const uri = vscode.Uri.parse("untitled:test.txt");
-        await vscode.window.showTextDocument(uri);
+        const doc = await vscode.workspace.openTextDocument({
+            "language": "Plain Text", "content": "",
+        });
+        await vscode.window.showTextDocument(doc);
     });
 
     suiteTeardown(async () => {
