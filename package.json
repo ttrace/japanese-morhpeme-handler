@@ -2,7 +2,7 @@
     "name": "japanese-morpheme-handler",
     "displayName": "Japanese Morpheme Handler",
     "description": "Better Japanese Morpheme handling on cursor movement",
-    "version": "0.9.1",
+    "version": "0.9.3",
     "publisher": "Taiyo Fujii",
     "repository": {
         "type": "git",
@@ -46,7 +46,7 @@
         "onCommand:extension.deleteWordEndRight",
         "onCommand:extension.deleteWordStartLeft"
     ],
-    "main": "./out/web/extension.js",
+    "main": "./dist/web/extension.js",
     "contributes": {
         "keybindings": [
             {
@@ -118,8 +118,6 @@
         ]
     },
     "dependencies": {
-        "@types/kuromoji": "^0.1.1",
-        "kuromoji": "^0.1.2"
     },
     "scripts": {
         "compile-web": "webpack",
@@ -130,6 +128,7 @@
         "test": "vscode-test-web --browserType=chromium --extensionDevelopmentPath=. --extensionTestsPath=dist/web/test/suite/index.js",
         "vscode:prepublish": "npm run package-web",
         "watch-web": "webpack --watch",
+        "run-extension": "webpack",
         "compile": "tsc -p ./"
     },
     "devDependencies": {
