@@ -63,8 +63,10 @@ and report it.
 
 - Japanese Morpheme Handler is released under [zlib License](./LICENSE).
 - Japanese Morpheme Hander is based on [Japanese Word Handler](https://github.com/sgryjp/japanese-word-handler) developed by [sgryip](https://github.com/sgryjp) released under [zlib License](./LICENSE_ORIGINAL).  
-Almost codes are same with original, well developed software.  Taiyo Fujii only add implementation of morpheme cursor moving.
-- Japanese Morpheme Handler includes [Kuromoji.js](https://github.com/takuyaa/kuromoji.js) by [Takuya Asano](https://github.com/takuyaa).
+
+Almost of all codes are same with original, well developed software.  Taiyo Fujii only add implementation of morpheme cursor moving.
+
+- TinySegmenter 0.1 -- Super compact Japanese tokenizer in Javascript [TinySegmenter](http://chasen.org/~taku/software/TinySegmenter/) by [Taku Kudo](http://chasen.org/~taku/) released under [BSD License](./LICENSE)
 
 ## Project Goal
 
