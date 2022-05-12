@@ -456,8 +456,9 @@ function makeClassifier(wordSeparators: string) {
     };
 }
 
+const segmenter = new (tinySegmenter as any);
+
 function segment(text: string): number[] {
-    const segmenter = new (tinySegmenter as any);
     const segment = segmenter.segment(text);
 
     let segmentIndexes = [];
@@ -469,9 +470,6 @@ function segment(text: string): number[] {
     console.log(segmentIndexes);
     return segmentIndexes;
 }
-
-
-
 
 // TinySegmenter 0.1 -- Super compact Japanese tokenizer in Javascript
 // (c) 2008 Taku Kudo <taku@chasen.org>
