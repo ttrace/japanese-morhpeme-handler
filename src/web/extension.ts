@@ -49,6 +49,11 @@ export function activate(context: vscode.ExtensionContext) {
     kuromojiBuilder = kuromoji.builder({
         dicPath: context.extensionPath + '/node_modules/kuromoji/dict'
     });
+
+    //const subscriptions: vscode.Disposable[] = [];
+    context.subscriptions.push(vscode.window.onDidChangeTextEditorSelection(async e => {
+        await makeMorpheme(e.textEditor);
+    }));
 }
 
 //-----------------------------------------------------------------------------
@@ -189,10 +194,11 @@ function findNextWordStart(
 
     //making cache
     if (caretPos.line !== editingLineCache) {
-        make_morpheme(doc.lineAt(caretPos.line).text);
+        //makeMorpheme(doc.lineAt(caretPos.line).text);
         editingLineCache = caretPos.line;
         editingLinesTokenCache = [];
     }
+
 
     let pos = caretPos;
     // Seek until character type changes, unless already reached EOL/EOD
@@ -247,10 +253,11 @@ function findNextWordEnd(
 
     //making cache
     if (caretPos.line !== editingLineCache) {
-        make_morpheme(doc.lineAt(caretPos.line).text);
+        //makeMorpheme(doc.lineAt(caretPos.line).text);
         editingLineCache = caretPos.line;
         editingLinesTokenCache = [];
     }
+
 
     // Skip a series of whitespaces
     let pos = caretPos;
@@ -272,7 +279,6 @@ function findNextWordEnd(
             target = editingLinesTokenCache[i];
         }
         target = editingLinesTokenCache[i + 1] - 1;
-        console.log('Pos:' + target);
         pos = new Position(caretPos.line, target);
     }
 
@@ -296,12 +302,6 @@ function findPreviousWordStart(
 
     const classify = makeClassifier(wordSeparators);
 
-    //making cache
-    if (caretPos.line !== editingLineCache) {
-        make_morpheme(doc.lineAt(caretPos.line).text);
-        editingLineCache = caretPos.line;
-        editingLinesTokenCache = [];
-    }
 
     let pos = caretPos;
 
@@ -312,6 +312,13 @@ function findPreviousWordStart(
             return pos;
         }
         return pos;
+    }
+
+    //making cache
+    if (caretPos.line !== editingLineCache) {
+        //makeMorpheme(doc.lineAt(caretPos.line).text);
+        editingLineCache = caretPos.line;
+        editingLinesTokenCache = [];
     }
 
     // Firstly skip whitespaces, excluding EOL codes.
@@ -340,7 +347,6 @@ function findPreviousWordStart(
             i++;
         }
         target = editingLinesTokenCache[i - 1] - 1;
-        console.log('Pos:' + target);
         pos = new Position(caretPos.line, target);
     }
 
@@ -357,14 +363,7 @@ function findPreviousWordEnd(
 ) {
     //const classify = makeClassifier(wordSeparators);
     if (caretPos.line !== editingLineCache && editingLinesTokenCache !== []) {
-        make_morpheme(doc.lineAt(caretPos.line).text);
-        editingLineCache = caretPos.line;
-        editingLinesTokenCache = [];
-    }
-
-    //making cache
-    if (caretPos.line !== editingLineCache) {
-        make_morpheme(doc.lineAt(caretPos.line).text);
+        //makeMorpheme(doc.lineAt(caretPos.line).text);
         editingLineCache = caretPos.line;
         editingLinesTokenCache = [];
     }
@@ -378,6 +377,13 @@ function findPreviousWordEnd(
         }
     }
     //assert 0 < pos.character
+
+    //making cache
+    if (caretPos.line !== editingLineCache) {
+        //makeMorpheme(doc.lineAt(caretPos.line).text);
+        editingLineCache = caretPos.line;
+        editingLinesTokenCache = [];
+    }
 
     if (caretPos.character === 0) {
         if (caretPos.line !== 0) {
@@ -485,19 +491,38 @@ function makeClassifier(wordSeparators: string) {
     };
 }
 
-function make_morpheme(text: string) {
-    kuromojiBuilder.build((err: any, tokenizer: any) => {
-        // 辞書がなかったりするとここでエラーになります(´・ω・｀)
-        if (err) {
-            console.dir('Kuromoji initialize error:' + err.message);
-            throw err;
-        };
-        const kuromojiToken = tokenizer.tokenize(text);
-        //console.log(kuromojiToken);
-        console.log(text);
+async function makeMorpheme(editor: vscode.TextEditor) {
+    if (editingLineCache !== editor.selection.active.line) {
         editingLinesTokenCache = [];
-        kuromojiToken.forEach((token: any) => {
-            editingLinesTokenCache.push(token.word_position);
+        const text = editor.document.lineAt(editor.selection.active.line).text;
+        editingLineCache = editor.selection.active.line;
+        //console.log("EDITING LINE:" + editingLineCache + text);
+        kuromojiBuilder.build((err: any, tokenizer: any) => {
+            // 辞書がなかったりするとここでエラーになります(´・ω・｀)
+            if (err) {
+                console.dir('Kuromoji initialize error:' + err.message);
+                throw err;
+            };
+            const kuromojiToken = tokenizer.tokenize(text);
+            console.log(kuromojiToken);
+
+            for (let i = 0; i < kuromojiToken.length; i++) {
+                const token = kuromojiToken[i];
+                //const previousToken = kuromojiToken[i-1];
+
+                if (token.pos === '助詞' && token.pos_detail_1 !== '接続助詞' && token.pos_detail_2 !== '連語') {
+                    //登録しない
+                } else if (token.pos === '助動詞') {
+                    //登録しない
+                } else if (token.pos_detail_1 === '非自立') {
+                    //登録しない
+                } else if (token.pos_detail_1 === '接尾') {
+                    //登録しない
+                } else {
+                    editingLinesTokenCache.push(token.word_position);
+                }
+
+            }
         });
-    });
+    }
 }

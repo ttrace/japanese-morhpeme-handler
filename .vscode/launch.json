@@ -9,7 +9,9 @@
             "args": [
                 "--extensionDevelopmentPath=${workspaceFolder}"
             ],
-            "outFiles": ["${workspaceFolder}/out/test/**/*.js"]
+            "outFiles": ["${workspaceFolder}/dist/test/**/*.js"],
+            "preLaunchTask": "npm: compile-web"
+
         },
 		{
 			"name": "Run Extension Tests",

@@ -2,7 +2,7 @@
     "name": "japanese-morpheme-handler",
     "displayName": "Japanese Morpheme Handler",
     "description": "Better Japanese Morpheme handling on cursor movement",
-    "version": "0.9.1",
+    "version": "0.9.2",
     "publisher": "Taiyo Fujii",
     "repository": {
         "type": "git",
@@ -27,6 +27,7 @@
     "license": "Zlib",
     "badges": [],
     "activationEvents": [
+        "onStartupFinished",
         "onCommand:morphemeWordHandler.cursorWordEndLeft",
         "onCommand:morphemeWordHandler.cursorWordEndLeftSelect",
         "onCommand:morphemeWordHandler.cursorWordEndRight",
@@ -46,7 +47,7 @@
         "onCommand:extension.deleteWordEndRight",
         "onCommand:extension.deleteWordStartLeft"
     ],
-    "main": "./out/web/extension.js",
+    "main": "./dist/web/extension.js",
     "contributes": {
         "keybindings": [
             {

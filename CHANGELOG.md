@@ -1,5 +1,9 @@
 # Change Log
 
+### 0.9.2
+
+- cursor jumping with pharse
+
 Change log of Japanese Morpheme Handler.
 THis extension is forked from [Japanese Word Handler](https://github.com/sgryjp/japanese-word-handler) developed by [Suguru Yamamoto](https://github.com/sgryjp) in 29th April 2022.
 
