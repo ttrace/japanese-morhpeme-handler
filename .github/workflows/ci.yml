@@ -34,4 +34,10 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
-      - run: npm run package-web
+      - run: npm install --global vsce
+      - run: vsce package
+      - uses: actions/upload-artifact@v3
+        with:
+          name: "VSIX file"
+          path: |
+            japanese-word-handler-*.vsix
