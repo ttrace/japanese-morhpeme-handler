@@ -7,20 +7,6 @@ on:
       - master
 
 jobs:
-  lint:
-    runs-on: windows-latest
-    strategy:
-      matrix:
-        node-version: ["16", "latest"]
-    steps:
-      - uses: actions/checkout@v3
-      - name: Setup Node.js (${{ matrix.node-version }})
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-      - run: npm ci
-      - run: npm run lint
-
   test:
     runs-on: windows-latest
     strategy:
@@ -37,6 +23,7 @@ jobs:
 
   package:
     runs-on: windows-latest
+    needs: test
     strategy:
       matrix:
         node-version: ["16"]
