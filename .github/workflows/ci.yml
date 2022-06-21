@@ -7,6 +7,20 @@ on:
       - master
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: ["16", "latest"]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node.js (${{ matrix.node-version }})
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci
+      - run: npm lint
+
   test:
     runs-on: windows-latest
     strategy:
@@ -14,7 +28,9 @@ jobs:
         node-version: ["16", "latest"]
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
       - name: Setup Node.js (${{ matrix.node-version }})
+        uses: actions/setup-node@v3
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
@@ -28,6 +44,7 @@ jobs:
       matrix:
         node-version: ["16"]
     steps:
+      - uses: actions/checkout@v3
       - uses: actions/checkout@v3
       - name: Setup Node.js (${{ matrix.node-version }})
         uses: actions/setup-node@v3
