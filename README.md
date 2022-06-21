@@ -6,7 +6,7 @@
 ![Rating (VS Marketplace)](https://vsmarketplacebadge.apphb.com/rating-star/sgryjp.japanese-word-handler.svg)
 ![Installs (VS Marketplace)](https://vsmarketplacebadge.apphb.com/installs-short/sgryjp.japanese-word-handler.svg)
 &nbsp;
-[![Build status](https://ci.appveyor.com/api/projects/status/eqclfgbaefm5npt8/branch/master?svg=true)](https://ci.appveyor.com/project/sgryjp/japanese-word-handler/branch/master)
+[![CI status](https://github.com/sgryjp/japanese-word-handler/actions/workflows/ci.yml/badge.svg)](https://github.com/sgryjp/japanese-word-handler/actions/workflows/ci.yml)
 [![zlib license](https://img.shields.io/badge/license-zlib-lightgray.svg?longCache=true&style=popout)](https://github.com/sgryjp/japanese-word-handler/blob/master/LICENSE)
 
 Better cursor movement in Japanese text for [VS Code](https://code.visualstudio.com).
