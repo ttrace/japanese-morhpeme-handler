@@ -39,12 +39,6 @@ export function activate(context: vscode.ExtensionContext) {
     registerCommand('extension.cursorWordStartLeftSelect', cursorWordStartLeftSelect);
     registerCommand('extension.deleteWordRight', deleteWordEndRight);
     registerCommand('extension.deleteWordLeft', deleteWordStartLeft);
-
-    // Initialize Kuromoji library
-    //kuromojiBuilder = kuromoji.builder({
-    //    dicPath: context.extensionPath + '/node_modules/kuromoji/dict'
-    //});
-    //kuromojiInit();
 }
 
 //-----------------------------------------------------------------------------
@@ -186,24 +180,8 @@ function findNextWordStart(
     //making token
     const linesToken = segment(doc.lineAt(caretPos.line).text);
 
-    //making token
-    const linesToken = segment(doc.lineAt(caretPos.line).text);
-
-    //making token
-    const linesToken = segment(doc.lineAt(caretPos.line).text);
-
-    let pos = caretPos;
-    // Seek until character type changes, unless already reached EOL/EOD
     // Seek until character type changes, unless already reached EOL/EOD
     let pos = caretPos;
-    if (linesToken.length === 0) {
-        pos = new Position(caretPos.line, caretPos.character + 1);
-    } else {
-        let target = 0;
-        let i = 0;
-        while (caretPos.character >= target) {
-            i++;
-            target = linesToken[i];
     if (linesToken.length === 0) {
         pos = new Position(caretPos.line, caretPos.character + 1);
     } else {
@@ -213,9 +191,6 @@ function findNextWordStart(
             i++;
             target = linesToken[i];
         }
-        target = linesToken[i + 1] - 1;
-        // console.log('Pos:' + target);
-        pos = new Position(caretPos.line, target);
         target = linesToken[i + 1] - 1;
         // console.log('Pos:' + target);
         pos = new Position(caretPos.line, target);
@@ -268,14 +243,6 @@ function findNextWordEnd(
     }
 
     // Seek until character type changes, unless already reached EOL/EOD
-    if (linesToken.length === 0) {
-        pos = new Position(caretPos.line, caretPos.character + 1);
-    } else {
-        let target = 0;
-        let i = 0;
-        while (caretPos.character >= target) {
-            i++;
-            target = linesToken[i];
     if (linesToken.length === 0) {
         pos = new Position(caretPos.line, caretPos.character + 1);
     } else {
@@ -384,15 +351,6 @@ function findPreviousWordEnd(
         return pos;
     }
 
-    if (caretPos.character === 0) {
-        if (caretPos.line !== 0) {
-            let lastCharacter = doc.lineAt(caretPos.line - 1).range.end.character;
-            pos = new Position(pos.line - 1, lastCharacter);
-            return pos;
-        }
-        return pos;
-    }
-
     // Seek until character type changes, unless already reached EOL/EOD
     if (linesToken.length === 0) {
         pos = new Position(caretPos.line, caretPos.character - 1);
@@ -402,18 +360,7 @@ function findPreviousWordEnd(
         while (caretPos.character >= target) {
             target = linesToken[i + 1];
             i++;
-    if (linesToken.length === 0) {
-        pos = new Position(caretPos.line, caretPos.character - 1);
-    } else {
-        let target = 0;
-        let i = 0;
-        while (caretPos.character >= target) {
-            target = linesToken[i + 1];
-            i++;
         }
-        target = linesToken[i - 1] - 1;
-        // console.log('Pos:' + target);
-        pos = new Position(caretPos.line, target);
         target = linesToken[i - 1] - 1;
         // console.log('Pos:' + target);
         pos = new Position(caretPos.line, target);
@@ -428,7 +375,6 @@ function findPreviousWordEnd(
  *                       (mostly used in English-like language context.)
  */
 function makeClassifier(wordSeparators: string) {
-
 
     return function classifyChar(
         doc: TextDocument,
