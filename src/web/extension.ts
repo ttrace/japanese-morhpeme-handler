@@ -186,9 +186,24 @@ function findNextWordStart(
     //making token
     const linesToken = segment(doc.lineAt(caretPos.line).text);
 
+    //making token
+    const linesToken = segment(doc.lineAt(caretPos.line).text);
+
+    //making token
+    const linesToken = segment(doc.lineAt(caretPos.line).text);
+
     let pos = caretPos;
     // Seek until character type changes, unless already reached EOL/EOD
     // Seek until character type changes, unless already reached EOL/EOD
+    let pos = caretPos;
+    if (linesToken.length === 0) {
+        pos = new Position(caretPos.line, caretPos.character + 1);
+    } else {
+        let target = 0;
+        let i = 0;
+        while (caretPos.character >= target) {
+            i++;
+            target = linesToken[i];
     if (linesToken.length === 0) {
         pos = new Position(caretPos.line, caretPos.character + 1);
     } else {
@@ -198,6 +213,9 @@ function findNextWordStart(
             i++;
             target = linesToken[i];
         }
+        target = linesToken[i + 1] - 1;
+        // console.log('Pos:' + target);
+        pos = new Position(caretPos.line, target);
         target = linesToken[i + 1] - 1;
         // console.log('Pos:' + target);
         pos = new Position(caretPos.line, target);
@@ -250,6 +268,14 @@ function findNextWordEnd(
     }
 
     // Seek until character type changes, unless already reached EOL/EOD
+    if (linesToken.length === 0) {
+        pos = new Position(caretPos.line, caretPos.character + 1);
+    } else {
+        let target = 0;
+        let i = 0;
+        while (caretPos.character >= target) {
+            i++;
+            target = linesToken[i];
     if (linesToken.length === 0) {
         pos = new Position(caretPos.line, caretPos.character + 1);
     } else {
@@ -358,6 +384,15 @@ function findPreviousWordEnd(
         return pos;
     }
 
+    if (caretPos.character === 0) {
+        if (caretPos.line !== 0) {
+            let lastCharacter = doc.lineAt(caretPos.line - 1).range.end.character;
+            pos = new Position(pos.line - 1, lastCharacter);
+            return pos;
+        }
+        return pos;
+    }
+
     // Seek until character type changes, unless already reached EOL/EOD
     if (linesToken.length === 0) {
         pos = new Position(caretPos.line, caretPos.character - 1);
@@ -367,7 +402,18 @@ function findPreviousWordEnd(
         while (caretPos.character >= target) {
             target = linesToken[i + 1];
             i++;
+    if (linesToken.length === 0) {
+        pos = new Position(caretPos.line, caretPos.character - 1);
+    } else {
+        let target = 0;
+        let i = 0;
+        while (caretPos.character >= target) {
+            target = linesToken[i + 1];
+            i++;
         }
+        target = linesToken[i - 1] - 1;
+        // console.log('Pos:' + target);
+        pos = new Position(caretPos.line, target);
         target = linesToken[i - 1] - 1;
         // console.log('Pos:' + target);
         pos = new Position(caretPos.line, target);
@@ -382,6 +428,7 @@ function findPreviousWordEnd(
  *                       (mostly used in English-like language context.)
  */
 function makeClassifier(wordSeparators: string) {
+
 
     return function classifyChar(
         doc: TextDocument,
@@ -476,6 +523,7 @@ function segment(text: string): number[] {
 // For details, see http://chasen.org/~taku/software/TinySegmenter/LICENCE.txt
 
 function tinySegmenter(this: any) {
+    // commenting out because typescript warning not used variables
     // const patterns = {
     //     "[一二三四五六七八九十百千万億兆]": "M",
     //     "[一-龠々〆ヵヶ]": "H",
