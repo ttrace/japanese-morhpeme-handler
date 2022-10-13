@@ -5,6 +5,21 @@ THis extension is forked from [Japanese Word Handler](https://github.com/sgryjp/
 
 ## Forked 2022-4-29
 
+### Releasing 0.9.2
+
+- update npm modules
+    @types/vscode                     ^1.61.0  →  ^1.71.0
+    @types/webpack-env                ^1.16.4  →  ^1.18.0
+    @typescript-eslint/eslint-plugin  ^5.21.0  →  ^5.36.2
+    @typescript-eslint/parser         ^5.21.0  →  ^5.36.2
+    @vscode/test-web                  ^0.0.24  →  ^0.0.30
+    eslint                            ^8.14.0  →  ^8.23.0
+    mocha                              ^9.2.2  →  ^10.0.0
+    ts-loader                          ^9.2.9  →   ^9.3.1
+    typescript                         ^4.6.3  →   ^4.8.2
+    webpack                           ^5.72.0  →  ^5.74.0
+    webpack-cli                        ^4.9.2  →  ^4.10.0
+
 ### Releasing 0.9.1
 
 - Morpheme Cursor Handling installed

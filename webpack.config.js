@@ -18,7 +18,7 @@ const webExtensionConfig = {
 	target: 'node', // extensions run in a webworker context
 	entry: {
 		'extension': './src/web/extension.ts',
-		'test/suite/index': './src/web/test/suite/index.ts'
+		//'test/suite/index': './src/web/test/suite/index.ts'
 	},
 	output: {
 		filename: '[name].js',
@@ -59,7 +59,7 @@ const webExtensionConfig = {
 	performance: {
 		hints: false
 	},
-	devtool: 'nosources-source-map', // create a source map that points to the original source file
+	devtool: 'sources-source-map', // create a source map that points to the original source file
 	infrastructureLogging: {
 		level: "log", // enables logging required for problem matchers
 	},

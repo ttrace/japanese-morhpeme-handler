@@ -467,7 +467,7 @@ function segment(text: string): number[] {
         segmentIndexes.push(openOffset);
         openOffset += segment[i].length;
     }
-    console.log(segmentIndexes);
+    //console.log(segmentIndexes);
     return segmentIndexes;
 }
 

@@ -2,14 +2,14 @@
     "name": "japanese-morpheme-handler",
     "displayName": "Japanese Morpheme Handler",
     "description": "Better Japanese Morpheme handling on cursor movement",
-    "version": "0.9.3",
+    "version": "0.9.5",
     "publisher": "Taiyo Fujii",
     "repository": {
         "type": "git",
         "url": "https://github.com/ttrace/japanese-morhpeme-handler"
     },
     "engines": {
-        "vscode": "^1.61.0"
+        "vscode": "^1.71.0"
     },
     "categories": [
         "Other"
@@ -66,9 +66,19 @@
                 "when": "editorTextFocus"
             },
             {
+                "command": "morphemeWordHandler.cursorWordEndRight",
+                "key": "ctrl+alt+f",
+                "when": "editorTextFocus"
+            },
+            {
                 "command": "morphemeWordHandler.cursorWordEndRightSelect",
                 "key": "ctrl+shift+right",
                 "mac": "alt+shift+right",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "morphemeWordHandler.cursorWordEndRightSelect",
+                "key": "ctrl+alt+shift+f",
                 "when": "editorTextFocus"
             },
             {
@@ -78,9 +88,19 @@
                 "when": "editorTextFocus"
             },
             {
+                "command": "morphemeWordHandler.cursorWordStartLeft",
+                "key": "ctrl+alt+b",
+                "when": "editorTextFocus"
+            },
+            {
                 "command": "morphemeWordHandler.cursorWordStartLeftSelect",
                 "key": "ctrl+shift+left",
                 "mac": "alt+shift+left",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "morphemeWordHandler.cursorWordStartLeftSelect",
+                "key": "ctrl+alt+shift+b",
                 "when": "editorTextFocus"
             },
             {
@@ -105,9 +125,20 @@
                 "when": "editorTextFocus && !editorReadonly"
             },
             {
+                "command": "morphemeWordHandler.deleteWordEndRight",
+                "key": "ctrl+alt+d",
+                "mac": "ctrl+alt+d",
+                "when": "editorTextFocus && !editorReadonly"
+            },
+            {
                 "command": "morphemeWordHandler.deleteWordStartLeft",
                 "key": "ctrl+backspace",
                 "mac": "alt+backspace",
+                "when": "editorTextFocus && !editorReadonly"
+            },
+            {
+                "command": "morphemeWordHandler.deleteWordStartLeft",
+                "key": "ctrl+alt+h",
                 "when": "editorTextFocus && !editorReadonly"
             },
             {
@@ -133,20 +164,20 @@
     },
     "devDependencies": {
         "@types/mocha": "^9.1.1",
-        "@types/vscode": "^1.61.0",
-        "@types/webpack-env": "^1.16.4",
-        "@typescript-eslint/eslint-plugin": "^5.21.0",
-        "@typescript-eslint/parser": "^5.21.0",
-        "@vscode/test-web": "^0.0.24",
+        "@types/vscode": "^1.71.0",
+        "@types/webpack-env": "^1.18.0",
+        "@typescript-eslint/eslint-plugin": "^5.36.2",
+        "@typescript-eslint/parser": "^5.36.2",
+        "@vscode/test-web": "^0.0.30",
         "assert": "^2.0.0",
-        "eslint": "^8.14.0",
-        "mocha": "^9.2.2",
+        "eslint": "^8.23.0",
+        "mocha": "^10.0.0",
         "path": "^0.12.7",
         "process": "^0.11.10",
-        "ts-loader": "^9.2.9",
-        "typescript": "^4.6.3",
-        "webpack": "^5.72.0",
-        "webpack-cli": "^4.9.2",
+        "ts-loader": "^9.3.1",
+        "typescript": "^4.8.2",
+        "webpack": "^5.74.0",
+        "webpack-cli": "^4.10.0",
         "webpack-env": "^0.8.0",
         "xhr2": "^0.2.1"
     }
