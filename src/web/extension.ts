@@ -19,18 +19,18 @@ export function activate(context: vscode.ExtensionContext) {
     };
 
     // Register commands
-    registerCommand('japaneseWordHandler.cursorWordEndLeft', cursorWordEndLeft);
-    registerCommand('japaneseWordHandler.cursorWordEndLeftSelect', cursorWordEndLeftSelect);
-    registerCommand('japaneseWordHandler.cursorWordEndRight', cursorWordEndRight);
-    registerCommand('japaneseWordHandler.cursorWordEndRightSelect', cursorWordEndRightSelect);
-    registerCommand('japaneseWordHandler.cursorWordStartLeft', cursorWordStartLeft);
-    registerCommand('japaneseWordHandler.cursorWordStartLeftSelect', cursorWordStartLeftSelect);
-    registerCommand('japaneseWordHandler.cursorWordStartRight', cursorWordStartRight);
-    registerCommand('japaneseWordHandler.cursorWordStartRightSelect', cursorWordStartRightSelect);
-    registerCommand('japaneseWordHandler.deleteWordEndLeft', deleteWordEndLeft);
-    registerCommand('japaneseWordHandler.deleteWordEndRight', deleteWordEndRight);
-    registerCommand('japaneseWordHandler.deleteWordStartLeft', deleteWordStartLeft);
-    registerCommand('japaneseWordHandler.deleteWordStartRight', deleteWordStartRight);
+    registerCommand('morphemeWordHandler.cursorWordEndLeft', cursorWordEndLeft);
+    registerCommand('morphemeWordHandler.cursorWordEndLeftSelect', cursorWordEndLeftSelect);
+    registerCommand('morphemeWordHandler.cursorWordEndRight', cursorWordEndRight);
+    registerCommand('morphemeWordHandler.cursorWordEndRightSelect', cursorWordEndRightSelect);
+    registerCommand('morphemeWordHandler.cursorWordStartLeft', cursorWordStartLeft);
+    registerCommand('morphemeWordHandler.cursorWordStartLeftSelect', cursorWordStartLeftSelect);
+    registerCommand('morphemeWordHandler.cursorWordStartRight', cursorWordStartRight);
+    registerCommand('morphemeWordHandler.cursorWordStartRightSelect', cursorWordStartRightSelect);
+    registerCommand('morphemeWordHandler.deleteWordEndLeft', deleteWordEndLeft);
+    registerCommand('morphemeWordHandler.deleteWordEndRight', deleteWordEndRight);
+    registerCommand('morphemeWordHandler.deleteWordStartLeft', deleteWordStartLeft);
+    registerCommand('morphemeWordHandler.deleteWordStartRight', deleteWordStartRight);
 
     // Register legacy commands for compatibility
     registerCommand('extension.cursorWordEndRight', cursorWordEndRight);
@@ -39,6 +39,12 @@ export function activate(context: vscode.ExtensionContext) {
     registerCommand('extension.cursorWordStartLeftSelect', cursorWordStartLeftSelect);
     registerCommand('extension.deleteWordRight', deleteWordEndRight);
     registerCommand('extension.deleteWordLeft', deleteWordStartLeft);
+
+    // Initialize Kuromoji library
+    //kuromojiBuilder = kuromoji.builder({
+    //    dicPath: context.extensionPath + '/node_modules/kuromoji/dict'
+    //});
+    //kuromojiInit();
 }
 
 //-----------------------------------------------------------------------------
@@ -180,8 +186,9 @@ function findNextWordStart(
     //making token
     const linesToken = segment(doc.lineAt(caretPos.line).text);
 
-    // Seek until character type changes, unless already reached EOL/EOD
     let pos = caretPos;
+    // Seek until character type changes, unless already reached EOL/EOD
+    // Seek until character type changes, unless already reached EOL/EOD
     if (linesToken.length === 0) {
         pos = new Position(caretPos.line, caretPos.character + 1);
     } else {
@@ -469,15 +476,14 @@ function segment(text: string): number[] {
 // For details, see http://chasen.org/~taku/software/TinySegmenter/LICENCE.txt
 
 function tinySegmenter(this: any) {
-    // commenting out because typescript warning not used variables
-    // const patterns = {
-    //     "[一二三四五六七八九十百千万億兆]": "M",
-    //     "[一-龠々〆ヵヶ]": "H",
-    //     "[ぁ-ん]": "I",
-    //     "[ァ-ヴーｱ-ﾝﾞｰ]": "K",
-    //     "[a-zA-Zａ-ｚＡ-Ｚ]": "A",
-    //     "[0-9０-９]": "N"
-    // };
+    const patterns = {
+        "[一二三四五六七八九十百千万億兆]": "M",
+        "[一-龠々〆ヵヶ]": "H",
+        "[ぁ-ん]": "I",
+        "[ァ-ヴーｱ-ﾝﾞｰ]": "K",
+        "[a-zA-Zａ-ｚＡ-Ｚ]": "A",
+        "[0-9０-９]": "N"
+    };
 
     this.chartype_ = [
         [/[一二三四五六七八九十百千万億兆]/, "M"],
