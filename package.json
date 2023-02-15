@@ -1,12 +1,12 @@
 {
-    "name": "japanese-word-handler",
-    "displayName": "Japanese Word Handler",
-    "description": "Better Japanese word handling on cursor movement",
-    "version": "1.4.1",
-    "publisher": "sgryjp",
+    "name": "japanese-morpheme-handler",
+    "displayName": "Japanese Morpheme Handler",
+    "description": "Better Japanese word handling on cursor movement based on Morpeheme",
+    "version": "1.0.0",
+    "publisher": "Taiyo Fujii",
     "repository": {
         "type": "git",
-        "url": "https://github.com/sgryjp/japanese-word-handler.git"
+        "url": "https://github.com/ttrace/morpheme-handler.git"
     },
     "engines": {
         "vscode": "^1.61.0"
@@ -48,18 +48,18 @@
         }
     ],
     "activationEvents": [
-        "onCommand:japaneseWordHandler.cursorWordEndLeft",
-        "onCommand:japaneseWordHandler.cursorWordEndLeftSelect",
-        "onCommand:japaneseWordHandler.cursorWordEndRight",
-        "onCommand:japaneseWordHandler.cursorWordEndRightSelect",
-        "onCommand:japaneseWordHandler.cursorWordStartLeft",
-        "onCommand:japaneseWordHandler.cursorWordStartLeftSelect",
-        "onCommand:japaneseWordHandler.cursorWordStartRight",
-        "onCommand:japaneseWordHandler.cursorWordStartRightSelect",
-        "onCommand:japaneseWordHandler.deleteWordEndLeft",
-        "onCommand:japaneseWordHandler.deleteWordEndRight",
-        "onCommand:japaneseWordHandler.deleteWordStartLeft",
-        "onCommand:japaneseWordHandler.deleteWordStartRight",
+        "onCommand:japaneseMorphemeHandler.cursorWordEndLeft",
+        "onCommand:japaneseMorphemeHandler.cursorWordEndLeftSelect",
+        "onCommand:japaneseMorphemeHandler.cursorWordEndRight",
+        "onCommand:japaneseMorphemeHandler.cursorWordEndRightSelect",
+        "onCommand:japaneseMorphemeHandler.cursorWordStartLeft",
+        "onCommand:japaneseMorphemeHandler.cursorWordStartLeftSelect",
+        "onCommand:japaneseMorphemeHandler.cursorWordStartRight",
+        "onCommand:japaneseMorphemeHandler.cursorWordStartRightSelect",
+        "onCommand:japaneseMorphemeHandler.deleteWordEndLeft",
+        "onCommand:japaneseMorphemeHandler.deleteWordEndRight",
+        "onCommand:japaneseMorphemeHandler.deleteWordStartLeft",
+        "onCommand:japaneseMorphemeHandler.deleteWordStartRight",
         "onCommand:extension.cursorNextWordEndJa",
         "onCommand:extension.cursorNextWordEndSelectJa",
         "onCommand:extension.cursorPrevWordStartJa",
@@ -72,68 +72,68 @@
     "contributes": {
         "keybindings": [
             {
-                "command": "japaneseWordHandler.cursorWordEndLeft",
+                "command": "japaneseMorphemeHandler.cursorWordEndLeft",
                 "key": "ctrl+alt+shift+9",
                 "when": "editorTextFocus"
             },
             {
-                "command": "japaneseWordHandler.cursorWordEndLeftSelect",
+                "command": "japaneseMorphemeHandler.cursorWordEndLeftSelect",
                 "key": "ctrl+alt+shift+9",
                 "when": "editorTextFocus"
             },
             {
-                "command": "japaneseWordHandler.cursorWordEndRight",
+                "command": "japaneseMorphemeHandler.cursorWordEndRight",
                 "key": "ctrl+right",
                 "mac": "alt+right",
                 "when": "editorTextFocus"
             },
             {
-                "command": "japaneseWordHandler.cursorWordEndRightSelect",
+                "command": "japaneseMorphemeHandler.cursorWordEndRightSelect",
                 "key": "ctrl+shift+right",
                 "mac": "alt+shift+right",
                 "when": "editorTextFocus"
             },
             {
-                "command": "japaneseWordHandler.cursorWordStartLeft",
+                "command": "japaneseMorphemeHandler.cursorWordStartLeft",
                 "key": "ctrl+left",
                 "mac": "alt+left",
                 "when": "editorTextFocus"
             },
             {
-                "command": "japaneseWordHandler.cursorWordStartLeftSelect",
+                "command": "japaneseMorphemeHandler.cursorWordStartLeftSelect",
                 "key": "ctrl+shift+left",
                 "mac": "alt+shift+left",
                 "when": "editorTextFocus"
             },
             {
-                "command": "japaneseWordHandler.cursorWordStartRight",
+                "command": "japaneseMorphemeHandler.cursorWordStartRight",
                 "key": "ctrl+alt+shift+9",
                 "when": "editorTextFocus"
             },
             {
-                "command": "japaneseWordHandler.cursorWordStartRightSelect",
+                "command": "japaneseMorphemeHandler.cursorWordStartRightSelect",
                 "key": "ctrl+alt+shift+9",
                 "when": "editorTextFocus"
             },
             {
-                "command": "japaneseWordHandler.deleteWordEndLeft",
+                "command": "japaneseMorphemeHandler.deleteWordEndLeft",
                 "key": "ctrl+alt+shift+9",
                 "when": "editorTextFocus && !editorReadonly"
             },
             {
-                "command": "japaneseWordHandler.deleteWordEndRight",
+                "command": "japaneseMorphemeHandler.deleteWordEndRight",
                 "key": "ctrl+delete",
                 "mac": "alt+delete",
                 "when": "editorTextFocus && !editorReadonly"
             },
             {
-                "command": "japaneseWordHandler.deleteWordStartLeft",
+                "command": "japaneseMorphemeHandler.deleteWordStartLeft",
                 "key": "ctrl+backspace",
                 "mac": "alt+backspace",
                 "when": "editorTextFocus && !editorReadonly"
             },
             {
-                "command": "japaneseWordHandler.deleteWordStartRight",
+                "command": "japaneseMorphemeHandler.deleteWordStartRight",
                 "key": "ctrl+alt+shift+9",
                 "when": "editorTextFocus && !editorReadonly"
             }

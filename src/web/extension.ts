@@ -19,18 +19,18 @@ export function activate(context: vscode.ExtensionContext) {
     };
 
     // Register commands
-    registerCommand('morphemeWordHandler.cursorWordEndLeft', cursorWordEndLeft);
-    registerCommand('morphemeWordHandler.cursorWordEndLeftSelect', cursorWordEndLeftSelect);
-    registerCommand('morphemeWordHandler.cursorWordEndRight', cursorWordEndRight);
-    registerCommand('morphemeWordHandler.cursorWordEndRightSelect', cursorWordEndRightSelect);
-    registerCommand('morphemeWordHandler.cursorWordStartLeft', cursorWordStartLeft);
-    registerCommand('morphemeWordHandler.cursorWordStartLeftSelect', cursorWordStartLeftSelect);
-    registerCommand('morphemeWordHandler.cursorWordStartRight', cursorWordStartRight);
-    registerCommand('morphemeWordHandler.cursorWordStartRightSelect', cursorWordStartRightSelect);
-    registerCommand('morphemeWordHandler.deleteWordEndLeft', deleteWordEndLeft);
-    registerCommand('morphemeWordHandler.deleteWordEndRight', deleteWordEndRight);
-    registerCommand('morphemeWordHandler.deleteWordStartLeft', deleteWordStartLeft);
-    registerCommand('morphemeWordHandler.deleteWordStartRight', deleteWordStartRight);
+    registerCommand('japaneseMorphemeHandler.cursorWordEndLeft', cursorWordEndLeft);
+    registerCommand('japaneseMorphemeHandler.cursorWordEndLeftSelect', cursorWordEndLeftSelect);
+    registerCommand('japaneseMorphemeHandler.cursorWordEndRight', cursorWordEndRight);
+    registerCommand('japaneseMorphemeHandler.cursorWordEndRightSelect', cursorWordEndRightSelect);
+    registerCommand('japaneseMorphemeHandler.cursorWordStartLeft', cursorWordStartLeft);
+    registerCommand('japaneseMorphemeHandler.cursorWordStartLeftSelect', cursorWordStartLeftSelect);
+    registerCommand('japaneseMorphemeHandler.cursorWordStartRight', cursorWordStartRight);
+    registerCommand('japaneseMorphemeHandler.cursorWordStartRightSelect', cursorWordStartRightSelect);
+    registerCommand('japaneseMorphemeHandler.deleteWordEndLeft', deleteWordEndLeft);
+    registerCommand('japaneseMorphemeHandler.deleteWordEndRight', deleteWordEndRight);
+    registerCommand('japaneseMorphemeHandler.deleteWordStartLeft', deleteWordStartLeft);
+    registerCommand('japaneseMorphemeHandler.deleteWordStartRight', deleteWordStartRight);
 
     // Register legacy commands for compatibility
     registerCommand('extension.cursorWordEndRight', cursorWordEndRight);
@@ -476,14 +476,14 @@ function segment(text: string): number[] {
 // For details, see http://chasen.org/~taku/software/TinySegmenter/LICENCE.txt
 
 function tinySegmenter(this: any) {
-    const patterns = {
-        "[一二三四五六七八九十百千万億兆]": "M",
-        "[一-龠々〆ヵヶ]": "H",
-        "[ぁ-ん]": "I",
-        "[ァ-ヴーｱ-ﾝﾞｰ]": "K",
-        "[a-zA-Zａ-ｚＡ-Ｚ]": "A",
-        "[0-9０-９]": "N"
-    };
+    // const patterns = {
+    //     "[一二三四五六七八九十百千万億兆]": "M",
+    //     "[一-龠々〆ヵヶ]": "H",
+    //     "[ぁ-ん]": "I",
+    //     "[ァ-ヴーｱ-ﾝﾞｰ]": "K",
+    //     "[a-zA-Zａ-ｚＡ-Ｚ]": "A",
+    //     "[0-9０-９]": "N"
+    // };
 
     this.chartype_ = [
         [/[一二三四五六七八九十百千万億兆]/, "M"],
