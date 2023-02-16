@@ -1,13 +1,14 @@
 {
     "name": "japanese-morpheme-handler",
-    "displayName": "Japanese Morpheme Handler",
-    "description": "Better Japanese word handling on cursor movement based on Morpeheme",
-    "version": "1.0.0",
-    "publisher": "Taiyo Fujii",
+    "displayName": "たんごカーソル",
+    "description": "日本語で単語ごとにカーソルを移動するショートカットを追加する機能拡張",
+    "version": "1.0.1",
+    "publisher": "TaiyoFujii",
     "repository": {
         "type": "git",
         "url": "https://github.com/ttrace/morpheme-handler.git"
     },
+    "icon": "images/icon.png",
     "engines": {
         "vscode": "^1.61.0"
     },
@@ -25,28 +26,6 @@
         "virtualWorkspaces": true
     },
     "license": "Zlib",
-    "badges": [
-        {
-            "url": "https://vsmarketplacebadge.apphb.com/rating-short/sgryjp.japanese-word-handler.svg",
-            "href": "https://marketplace.visualstudio.com/items?itemName=sgryjp.japanese-word-handler",
-            "description": "Rating (VS Marketplace)"
-        },
-        {
-            "url": "https://vsmarketplacebadge.apphb.com/installs-short/sgryjp.japanese-word-handler.svg",
-            "href": "https://marketplace.visualstudio.com/items?itemName=sgryjp.japanese-word-handler",
-            "description": "Number of installations (VS Marketplace)"
-        },
-        {
-            "url": "https://github.com/sgryjp/japanese-word-handler/actions/workflows/ci.yml/badge.svg",
-            "href": "https://github.com/sgryjp/japanese-word-handler/actions/workflows/ci.yml",
-            "description": "CI status"
-        },
-        {
-            "url": "https://img.shields.io/badge/license-zlib-lightgrey.svg?longCache=true&style=popout",
-            "href": "https://github.com/sgryjp/japanese-word-handler/blob/master/LICENSE",
-            "description": "zlib License"
-        }
-    ],
     "activationEvents": [
         "onCommand:japaneseMorphemeHandler.cursorWordEndLeft",
         "onCommand:japaneseMorphemeHandler.cursorWordEndLeftSelect",
@@ -70,21 +49,42 @@
     "main": "./dist/web/extension.js",
     "browser": "./dist/web/extension.js",
     "contributes": {
+        "commands": [
+            {
+                "command": "japaneseMorphemeHandler.cursorWordEndRight",
+                "title": "次の単語の先頭に移動"
+            },
+            {
+                "command": "japaneseMorphemeHandler.cursorWordEndRightSelect",
+                "title": "次の単語の先頭まで選択"
+            },
+            {
+                "command": "japaneseMorphemeHandler.cursorWordStartLeft",
+                "title": "前の単語の末尾まで移動"
+            },
+            {
+                "command": "japaneseMorphemeHandler.cursorWordStartLeftSelect",
+                "title": "前の単語の末尾まで選択"
+            },
+            {
+                "command": "japaneseMorphemeHandler.deleteWordEndRight",
+                "title": "次の単語の先頭まで削除"
+            },
+            {
+                "command": "japaneseMorphemeHandler.deleteWordEndRight",
+                "title": "次の単語の先頭まで削除"
+            }
+        ],
         "keybindings": [
-            {
-                "command": "japaneseMorphemeHandler.cursorWordEndLeft",
-                "key": "ctrl+alt+shift+9",
-                "when": "editorTextFocus"
-            },
-            {
-                "command": "japaneseMorphemeHandler.cursorWordEndLeftSelect",
-                "key": "ctrl+alt+shift+9",
-                "when": "editorTextFocus"
-            },
             {
                 "command": "japaneseMorphemeHandler.cursorWordEndRight",
                 "key": "ctrl+right",
                 "mac": "alt+right",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "japaneseMorphemeHandler.cursorWordEndRight",
+                "key": "ctrl+alt+f",
                 "when": "editorTextFocus"
             },
             {
@@ -94,9 +94,19 @@
                 "when": "editorTextFocus"
             },
             {
+                "command": "japaneseMorphemeHandler.cursorWordEndRightSelect",
+                "key": "ctrl+alt+shift+f",
+                "when": "editorTextFocus"
+            },
+            {
                 "command": "japaneseMorphemeHandler.cursorWordStartLeft",
                 "key": "ctrl+left",
                 "mac": "alt+left",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "japaneseMorphemeHandler.cursorWordStartLeft",
+                "key": "ctrl+alt+b",
                 "when": "editorTextFocus"
             },
             {
@@ -106,19 +116,9 @@
                 "when": "editorTextFocus"
             },
             {
-                "command": "japaneseMorphemeHandler.cursorWordStartRight",
-                "key": "ctrl+alt+shift+9",
+                "command": "japaneseMorphemeHandler.cursorWordStartLeftSelect",
+                "key": "ctrl+alt+shift+b",
                 "when": "editorTextFocus"
-            },
-            {
-                "command": "japaneseMorphemeHandler.cursorWordStartRightSelect",
-                "key": "ctrl+alt+shift+9",
-                "when": "editorTextFocus"
-            },
-            {
-                "command": "japaneseMorphemeHandler.deleteWordEndLeft",
-                "key": "ctrl+alt+shift+9",
-                "when": "editorTextFocus && !editorReadonly"
             },
             {
                 "command": "japaneseMorphemeHandler.deleteWordEndRight",
@@ -127,15 +127,24 @@
                 "when": "editorTextFocus && !editorReadonly"
             },
             {
+                "command": "japaneseMorphemeHandler.deleteWordEndRight",
+                "key": "ctrl+alt+d",
+                "mac": "ctrl+alt+d",
+                "when": "editorTextFocus && !editorReadonly",
+                "title": "次の単語の先頭まで削除"
+            },
+            {
                 "command": "japaneseMorphemeHandler.deleteWordStartLeft",
                 "key": "ctrl+backspace",
                 "mac": "alt+backspace",
-                "when": "editorTextFocus && !editorReadonly"
+                "when": "editorTextFocus && !editorReadonly",
+                "title": "前の単語の末尾まで削除"
             },
             {
-                "command": "japaneseMorphemeHandler.deleteWordStartRight",
-                "key": "ctrl+alt+shift+9",
-                "when": "editorTextFocus && !editorReadonly"
+                "command": "japaneseMorphemeHandler.deleteWordStartLeft",
+                "key": "ctrl+alt+h",
+                "when": "editorTextFocus && !editorReadonly",
+                "title": "前の単語の末尾まで削除"
             }
         ]
     },
