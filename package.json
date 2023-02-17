@@ -2,11 +2,11 @@
     "name": "japanese-morpheme-handler",
     "displayName": "たんごカーソル",
     "description": "日本語で単語ごとにカーソルを移動するショートカットを追加する機能拡張",
-    "version": "1.0.1",
+    "version": "1.0.4",
     "publisher": "TaiyoFujii",
     "repository": {
         "type": "git",
-        "url": "https://github.com/ttrace/morpheme-handler.git"
+        "url": "https://github.com/ttrace/japanese-morhpeme-handler"
     },
     "icon": "images/icon.png",
     "engines": {

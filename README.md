@@ -28,10 +28,10 @@
 
 標準のVS Codeで、次の単語の先頭に移動するショートカット<kbd>Ctrl</kbd>+<kbd>→</kbd>を入力すると、日本語の単語区切りを認識できないために行末にカーソルが移動してしまいます。
 
-![Original cursor movement](images/vanilla.gif)
+![Original cursor movement](https://github.com/ttrace/japanese-morhpeme-handler/raw/main/images/vanilla.gif)
 
 たんごカーソルをインストールして<kbd>Ctrl</kbd>(MacやiPadでは<kbd>Option</kbd>)キーを押しながら左右のカーソルキーを<kbd>←</kbd><kbd>→</kbd>入力すると、単語ごとにカーソルを移動させることができるようになります。また、<kbd>Shift</kbd>キーを併用することで単語ごとの選択を行うこと、<kbd>Delete</kbd>や<kbd>Backspace</kbd>で単語ごとに削除することも可能です。
-![Improved cursor movement](images/tango.gif)
+![Improved cursor movement](https://github.com/ttrace/japanese-morhpeme-handler/raw/main/images/tango.gif)
 
 ## 制限事項
 
